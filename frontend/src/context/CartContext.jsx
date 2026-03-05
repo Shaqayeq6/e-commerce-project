@@ -1,35 +1,76 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 
 export const CartContext = createContext();
+
+function getKey(product) {
+  const size = product.selectedSize ?? "";
+  return `${product.id}-${size}`;
+}
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
+  const clearCart = () => setCart([]);
+
   const addToCart = (product) => {
-    const existing = cart.find(item => item.id === product.id);
+    const key = getKey(product);
 
-    if (existing) {
-      setCart(cart.map(item =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      ));
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
+    setCart((prev) => {
+      const existing = prev.find((item) => item.key === key);
+
+      if (existing) {
+        return prev.map((item) =>
+          item.key === key ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+
+      return [...prev, { ...product, key, quantity: 1 }];
+    });
   };
 
-  const removeFromCart = (id) => {
-    setCart(cart.filter(item => item.id !== id));
+  const removeFromCart = (key) => {
+    setCart((prev) => prev.filter((item) => item.key !== key));
   };
 
-  const totalPrice = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const increaseQty = (key) => {
+    setCart((prev) =>
+      prev.map((item) =>
+        item.key === key ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  const decreaseQty = (key) => {
+    setCart((prev) =>
+      prev
+        .map((item) =>
+          item.key === key ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const totalPrice = useMemo(() => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  }, [cart]);
+
+  const totalItems = useMemo(() => {
+    return cart.reduce((sum, item) => sum + item.quantity, 0);
+  }, [cart]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, totalPrice }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        increaseQty,
+        decreaseQty,
+        totalPrice,
+        totalItems,
+        clearCart
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -3,6 +3,8 @@ import Catalog from "./pages/Catalog";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
+import Checkout from "./pages/Checkout";
+import Confirmation from "./pages/Confirmation";
 
 export default function App() {
   return (
@@ -12,6 +14,8 @@ export default function App() {
         <Route path="/" element={<Catalog />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
     </BrowserRouter>
   );

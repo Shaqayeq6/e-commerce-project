@@ -4,8 +4,9 @@ import { CartContext } from "../context/CartContext";
 
 export default function Navbar() {
   const { cart } = useContext(CartContext);
+  const { totalItems } = useContext(CartContext);
 
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  
 
   return (
     <nav style={{
