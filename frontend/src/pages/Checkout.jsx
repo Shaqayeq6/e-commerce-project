@@ -31,17 +31,53 @@ export default function Checkout() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const placeOrder = () => {
-    // For now: frontend-only checkout success
-    // Next step: call backend /api/checkout
+ const placeOrder = async () => {
+  console.log("Place Order clicked");
+
+  const orderPayload = {
+    customer: form,
+    items: [...cart],
+    total: totalPrice
+  };
+
+  console.log("Sending payload:", orderPayload);
+
+  try {
+    const res = await fetch("http://127.0.0.1:5000/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(orderPayload)
+    });
+
+    console.log("Response status:", res.status);
+
+    const text = await res.text();
+    console.log("Raw response text:", text);
+
+    const data = JSON.parse(text);
+
+    if (!res.ok || !data.success) {
+      alert(data.message || "Checkout failed");
+      return;
+    }
+
+    clearCart();
+
     navigate("/confirmation", {
       state: {
-        orderId: Math.floor(Math.random() * 1000000),
+        orderId: data.orderId,
         customer: form,
-        total: totalPrice
+        total: totalPrice,
+        items: [...cart]
       }
     });
-  };
+  } catch (err) {
+    console.error("Checkout fetch error:", err);
+    alert("Could not reach backend on port 5000");
+  }
+};
 
   return (
     <div style={{ padding: 20 }}>

@@ -86,7 +86,9 @@ export default function Catalog() {
           <option value="name_desc">Name: Z → A</option>
         </select>
 
-        <Link to="/cart" style={{ padding: 10, textDecoration: "none" }}>Go to Cart →</Link>
+        <Link to="/cart" style={{ padding: 10, textDecoration: "none" }}>
+          Go to Cart →
+        </Link>
       </div>
 
       {/* Grid */}
@@ -98,13 +100,44 @@ export default function Catalog() {
         }}
       >
         {filtered.map((p) => (
-          <div key={p.id} style={{ border: "1px solid #ddd", borderRadius: 12, padding: 14 }}>
-            <img src={p.image} alt={p.name} style={{ width: "100%", borderRadius: 10 }} />
-            <h3 style={{ margin: "10px 0 4px" }}>{p.name}</h3>
+          <div
+            key={p.id}
+            style={{
+              border: "1px solid #ddd",
+              borderRadius: 12,
+              padding: 14,
+              display: "flex",
+              flexDirection: "column",
+              gap: 8
+            }}
+          >
+            <img
+              src={p.image}
+              alt={p.name}
+              style={{
+                width: "100%",
+                height: 220,
+                objectFit: "cover",
+                borderRadius: 10
+              }}
+            />
+
+            <h3
+              style={{
+                margin: "10px 0 4px",
+                minHeight: 56
+              }}
+            >
+              {p.name}
+            </h3>
+
             <div style={{ fontSize: 14, opacity: 0.8 }}>
               {p.category} • {p.brand} • {p.type}
             </div>
-            <div style={{ marginTop: 8, fontWeight: "bold" }}>${p.price.toFixed(2)}</div>
+
+            <div style={{ marginTop: 8, fontWeight: "bold" }}>
+              ${p.price.toFixed(2)}
+            </div>
 
             <div style={{ marginTop: 10 }}>
               <Link to={`/product/${p.id}`}>View Details</Link>

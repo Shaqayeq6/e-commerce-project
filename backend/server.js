@@ -9,74 +9,73 @@ app.use(express.json());
 /* -------------------------
    Dummy Product Data
 -------------------------- */
-const products = [
+let products = [
   {
     id: 1,
     name: "AirFlex Runner",
-    price: 129.99,
-    category: "Women",
-    sizes: [6, 7, 8, 9, 10],
     brand: "Nike",
+    category: "Men",
     type: "Running",
-    image: "https://via.placeholder.com/200",
-    description: "Lightweight running shoes with breathable mesh."
+    price: 129.99,
+    sizes: [7, 8, 9, 10, 11],
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
   },
   {
     id: 2,
-    name: "Street Classic",
-    price: 89.99,
-    category: "Men",
-    sizes: [6, 7, 8, 9, 10],
+    name: "Urban Street Sneaker",
     brand: "Adidas",
-    type: "Sneakers",
-    image: "https://via.placeholder.com/200",
-    description: "Everyday sneakers with durable sole and comfort fit."
+    category: "Women",
+    type: "Casual",
+    price: 109.99,
+    sizes: [6, 7, 8, 9],
+    image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77"
   },
   {
     id: 3,
-    name: "KidSprint",
-    price: 49.99,
-    category: "Kids",
-    sizes: [1, 2, 3, 4, 5],
-    brand: "Puma",
-    type: "Sport",
-    image: "https://via.placeholder.com/200",
-    description: "Comfortable sports shoes for active kids."
+    name: "TrailBlazer Hiker",
+    brand: "Columbia",
+    category: "Men",
+    type: "Hiking",
+    price: 149.99,
+    sizes: [8, 9, 10, 11, 12],
+    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519"
   },
   {
     id: 4,
     name: "Office Loafer",
-    price: 99.99,
-    category: "Women",
-    sizes: [6, 7, 8, 9, 10],
     brand: "Clarks",
+    category: "Women",
     type: "Formal",
-    image: "https://via.placeholder.com/200",
-    description: "Clean loafer style for office and formal wear."
+    price: 99.99,
+    sizes: [6, 7, 8],
+    image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5"
   },
   {
     id: 5,
-    name: "Trail Master",
-    price: 149.99,
-    category: "Men",
-    sizes: [6, 7, 8, 9, 10],
-    brand: "Salomon",
-    type: "Hiking",
-    image: "https://via.placeholder.com/200",
-    description: "Grip-focused hiking shoes for trails and outdoor use."
+    name: "KidsSprint",
+    brand: "Puma",
+    category: "Kids",
+    type: "Sport",
+    price: 49.99,
+    sizes: [1, 2, 3, 4],
+    image: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1"
   },
   {
     id: 6,
-    name: "MiniSandals",
-    price: 29.99,
-    category: "Kids",
-    sizes: [1, 2, 3, 4, 5],
-    brand: "Crocs",
+    name: "Summer Sandal",
+    brand: "Birkenstock",
+    category: "Women",
     type: "Sandals",
-    image: "https://via.placeholder.com/200",
-    description: "Easy slip-on sandals for summer days."
+    price: 79.99,
+    sizes: [6, 7, 8, 9],
+    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a"
   }
 ];
+
+/* -------------------------
+   In-Memory Orders
+-------------------------- */
+const orders = [];
 
 /* -------------------------
    Health Check Route
@@ -97,41 +96,138 @@ app.get("/api/products", (req, res) => {
 -------------------------- */
 app.get("/api/products/:id", (req, res) => {
   const id = Number(req.params.id);
-  const product = products.find(p => p.id === id);
+  const product = products.find((p) => p.id === id);
 
   if (!product) {
-    return res.status(404).json({ message: "Product not found" });
+    return res.status(404).json({
+      success: false,
+      message: "Product not found"
+    });
   }
 
   res.json(product);
 });
 
-app.post("/api/checkout", (req, res) => {
-  const { customer, cart } = req.body;
+/* -------------------------
+   Add Product
+-------------------------- */
+app.post("/api/products", (req, res) => {
+  const { name, brand, category, type, price, sizes, image } = req.body;
 
-  // Basic validation
-  if (!customer || !cart || !Array.isArray(cart) || cart.length === 0) {
-    return res.status(400).json({ message: "Invalid checkout data." });
+  if (!name || !brand || !category || !type || !price || !image) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing product information"
+    });
   }
 
-  // Dummy “payment” rule:
-  // If last digit of postal code is EVEN -> approved, ODD -> denied
-  const lastChar = String(customer.postalCode || "").trim().slice(-1);
-  const lastDigit = Number(lastChar);
+  const newProduct = {
+    id: products.length ? Math.max(...products.map((p) => p.id)) + 1 : 1,
+    name,
+    brand,
+    category,
+    type,
+    price: Number(price),
+    sizes: Array.isArray(sizes) ? sizes : [],
+    image
+  };
 
-  const approved = Number.isFinite(lastDigit) && lastDigit % 2 === 0;
+  products.push(newProduct);
 
-  if (!approved) {
-    return res.status(402).json({ message: "Credit Card Authorization Failed." });
+  res.status(201).json({
+    success: true,
+    message: "Product added successfully",
+    product: newProduct
+  });
+});
+
+/* -------------------------
+   Delete Product
+-------------------------- */
+app.delete("/api/products/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const existingProduct = products.find((p) => p.id === id);
+
+  if (!existingProduct) {
+    return res.status(404).json({
+      success: false,
+      message: "Product not found"
+    });
+  }
+
+  products = products.filter((p) => p.id !== id);
+
+  res.json({
+    success: true,
+    message: "Product deleted successfully"
+  });
+});
+
+/* -------------------------
+   Checkout Route
+-------------------------- */
+app.post("/api/checkout", (req, res) => {
+  console.log("Checkout route hit");
+  console.log("Request body:", req.body);
+
+  const { customer, items, total } = req.body;
+
+  if (!customer || !items || !Array.isArray(items) || items.length === 0 || !total) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing order information"
+    });
+  }
+
+  if (
+    !customer.fullName ||
+    !customer.email ||
+    !customer.address ||
+    !customer.city ||
+    !customer.postalCode
+  ) {
+    return res.status(400).json({
+      success: false,
+      message: "Customer information is incomplete"
+    });
   }
 
   const orderId = Math.floor(Math.random() * 1000000);
 
-  return res.json({
-    message: "Payment approved.",
+  const newOrder = {
+    orderId,
+    customer,
+    items,
+    total,
+    createdAt: new Date().toISOString()
+  };
+
+  orders.push(newOrder);
+
+  return res.status(200).json({
+    success: true,
+    message: "Payment authorized",
     orderId
   });
 });
+
+/* -------------------------
+   Get All Orders
+-------------------------- */
+app.get("/api/orders", (req, res) => {
+  res.json(orders);
+});
+
+/* -------------------------
+   Fallback Route
+-------------------------- */
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found"
+  });
+});
+
 /* -------------------------
    Start Server
 -------------------------- */

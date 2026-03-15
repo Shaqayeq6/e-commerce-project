@@ -1,0 +1,101 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+export default function Orders() {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/orders")
+      .then((res) => res.json())
+      .then((data) => {
+        setOrders(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load orders:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div style={{ padding: 20, maxWidth: 1000, margin: "0 auto" }}>
+      <h1 style={{ marginBottom: 20 }}>Orders</h1>
+
+      <div style={{ marginBottom: 16 }}>
+        <Link to="/">⬅ Back to Store</Link>
+      </div>
+
+      {loading ? (
+        <p>Loading orders...</p>
+      ) : orders.length === 0 ? (
+        <p>No orders found yet.</p>
+      ) : (
+        <div style={{ display: "grid", gap: 16 }}>
+          {orders
+            .slice()
+            .reverse()
+            .map((order) => (
+              <div
+                key={order.orderId}
+                style={{
+                  border: "1px solid #ddd",
+                  borderRadius: 12,
+                  padding: 16
+                }}
+              >
+                <h2 style={{ marginBottom: 10 }}>Order #{order.orderId}</h2>
+                <p>
+                  <strong>Name:</strong> {order.customer.fullName}
+                </p>
+                <p>
+                  <strong>Email:</strong> {order.customer.email}
+                </p>
+                <p>
+                  <strong>Total:</strong> ${Number(order.total).toFixed(2)}
+                </p>
+                <p>
+                  <strong>Date:</strong>{" "}
+                  {new Date(order.createdAt).toLocaleString()}
+                </p>
+
+                <div style={{ marginTop: 12 }}>
+                  <strong>Items:</strong>
+                  <div style={{ marginTop: 8 }}>
+                    {order.items.map((item) => (
+                      <div
+                        key={item.key}
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          marginBottom: 8,
+                          paddingBottom: 8,
+                          borderBottom: "1px solid #eee"
+                        }}
+                      >
+                        <div>
+                          <div style={{ fontWeight: "bold" }}>{item.name}</div>
+                          <div style={{ fontSize: 13, opacity: 0.8 }}>
+                            {item.brand} • {item.category}
+                            {item.selectedSize
+                              ? ` • Size ${item.selectedSize}`
+                              : ""}
+                          </div>
+                          <div style={{ fontSize: 13 }}>
+                            Qty: {item.quantity}
+                          </div>
+                        </div>
+                        <div>
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+      )}
+    </div>
+  );
+}
