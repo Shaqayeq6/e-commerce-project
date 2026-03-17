@@ -7,7 +7,6 @@ import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
 import OrderSuccess from "./pages/OrderSuccess";
 import Orders from "./pages/Orders";
-import Admin from "./pages/Admin";
 
 export default function App() {
   return (
@@ -21,9 +20,6 @@ export default function App() {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/orders" element={<Orders />} />
-        <Route path="/admin" element={<Admin />} />
-      
-        
       </Routes>
     </BrowserRouter>
   );

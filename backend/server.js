@@ -17,7 +17,7 @@ let products = [
     category: "Men",
     type: "Running",
     price: 129.99,
-    sizes: [7, 8, 9, 10, 11],
+    sizes: [7, 8, 9, 10, 11, 12],
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
   },
   {
@@ -27,7 +27,7 @@ let products = [
     category: "Women",
     type: "Casual",
     price: 109.99,
-    sizes: [6, 7, 8, 9],
+    sizes: [6, 7, 8, 9, 10, 11],
     image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77"
   },
   {
@@ -47,7 +47,7 @@ let products = [
     category: "Women",
     type: "Formal",
     price: 99.99,
-    sizes: [6, 7, 8],
+    sizes: [6, 7, 8, 9, 10, 11],
     image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5"
   },
   {
@@ -67,7 +67,7 @@ let products = [
     category: "Women",
     type: "Sandals",
     price: 79.99,
-    sizes: [6, 7, 8, 9],
+    sizes: [6, 7, 8, 9, 10, 11],
     image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a"
   }
 ];
@@ -231,7 +231,7 @@ app.use((req, res) => {
 /* -------------------------
    Start Server
 -------------------------- */
-const PORT = 5000;
+const PORT = 5001;
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -37,12 +37,6 @@ export default function Navbar() {
         >
           🛒 Cart ({totalItems})
         </Link>
-        <Link
-  to="/admin"
-  style={{ color: "white", textDecoration: "none" }}
->
-  Admin
-</Link>
       </div>
     </nav>
   );
