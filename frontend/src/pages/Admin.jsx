@@ -17,7 +17,11 @@ export default function Admin() {
 
   const loadProducts = async () => {
     try {
+<<<<<<< HEAD
       const res = await fetch("http://localhost:5000/api/products");
+=======
+      const res = await fetch("http://localhost:5001/api/products");
+>>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -51,7 +55,11 @@ export default function Admin() {
           .filter((n) => !Number.isNaN(n))
       };
 
+<<<<<<< HEAD
       const res = await fetch("http://localhost:5000/api/products", {
+=======
+      const res = await fetch("http://localhost:5001/api/products", {
+>>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -88,7 +96,11 @@ export default function Admin() {
     if (!confirmed) return;
 
     try {
+<<<<<<< HEAD
       const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+=======
+      const res = await fetch(`http://localhost:5001/api/products/${id}`, {
+>>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
         method: "DELETE"
       });
 

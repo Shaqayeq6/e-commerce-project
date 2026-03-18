@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+<<<<<<< HEAD
 
 export default function Navbar() {
   const { totalItems } = useContext(CartContext);
+=======
+import { AuthContext } from "../context/AuthContext";
+
+export default function Navbar() {
+  const { totalItems } = useContext(CartContext);
+  const { user } = useContext(AuthContext);
+>>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
 
   return (
     <nav
@@ -24,6 +32,7 @@ export default function Navbar() {
       </Link>
 
       <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+<<<<<<< HEAD
         <Link
           to="/orders"
           style={{ color: "white", textDecoration: "none" }}
@@ -47,3 +56,35 @@ export default function Navbar() {
     </nav>
   );
 }
+=======
+        
+        {/* Admin Links */}
+        {user && user.role === 'admin' && (
+          <Link to="/admin/customers" style={{ color: "#ffeb3b", textDecoration: "none", fontWeight: "bold" }}>
+            Admin: Customers
+          </Link>
+        )}
+
+        {/* Regular User / Guest Links */}
+        <Link to="/orders" style={{ color: "white", textDecoration: "none" }}>
+          Orders
+        </Link>
+        
+        {user ? (
+          <Link to="/profile" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>
+            Hi, {user.fullName.split(' ')[0]} (Profile)
+          </Link>
+        ) : (
+          <Link to="/login" style={{ color: "white", textDecoration: "none" }}>
+            Login / Register
+          </Link>
+        )}
+
+        <Link to="/cart" style={{ color: "white", textDecoration: "none" }}>
+          🛒 Cart ({totalItems})
+        </Link>
+      </div>
+    </nav>
+  );
+}
+>>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7

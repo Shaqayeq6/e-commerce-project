@@ -7,7 +7,14 @@ import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
 import OrderSuccess from "./pages/OrderSuccess";
 import Orders from "./pages/Orders";
+<<<<<<< HEAD
 import Admin from "./pages/Admin";
+=======
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import Customers from "./pages/Customers";
+>>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
 
 export default function App() {
   return (
@@ -21,6 +28,7 @@ export default function App() {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/orders" element={<Orders />} />
+<<<<<<< HEAD
         <Route path="/admin" element={<Admin />} />
       
         
@@ -28,3 +36,13 @@ export default function App() {
     </BrowserRouter>
   );
 }
+=======
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/admin/customers" element={<Customers />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+>>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7

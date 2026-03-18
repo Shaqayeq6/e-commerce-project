@@ -17,8 +17,9 @@ let products = [
     category: "Men",
     type: "Running",
     price: 129.99,
-    sizes: [7, 8, 9, 10, 11],
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+    quantity: 10,
+    sizes: [7, 8, 9, 10, 11, 12],
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format"
   },
   {
     id: 2,
@@ -27,8 +28,9 @@ let products = [
     category: "Women",
     type: "Casual",
     price: 109.99,
-    sizes: [6, 7, 8, 9],
-    image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77"
+    quantity: 8,
+    sizes: [6, 7, 8, 9, 10, 11],
+    image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format"
   },
   {
     id: 3,
@@ -37,8 +39,9 @@ let products = [
     category: "Men",
     type: "Hiking",
     price: 149.99,
+    quantity: 5,
     sizes: [8, 9, 10, 11, 12],
-    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519"
+    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&q=80&auto=format"
   },
   {
     id: 4,
@@ -47,8 +50,9 @@ let products = [
     category: "Women",
     type: "Formal",
     price: 99.99,
-    sizes: [6, 7, 8],
-    image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5"
+    quantity: 12,
+    sizes: [6, 7, 8, 9, 10, 11],
+    image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format"
   },
   {
     id: 5,
@@ -57,8 +61,9 @@ let products = [
     category: "Kids",
     type: "Sport",
     price: 49.99,
+    quantity: 15,
     sizes: [1, 2, 3, 4],
-    image: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1"
+    image: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?w=600&q=80&auto=format"
   },
   {
     id: 6,
@@ -67,8 +72,9 @@ let products = [
     category: "Women",
     type: "Sandals",
     price: 79.99,
-    sizes: [6, 7, 8, 9],
-    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a"
+    quantity: 7,
+    sizes: [6, 7, 8, 9, 10, 11],
+    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80&auto=format"
   }
 ];
 
@@ -76,6 +82,97 @@ let products = [
    In-Memory Orders
 -------------------------- */
 const orders = [];
+
+/* -------------------------
+   In-Memory Users
+-------------------------- */
+let users = [
+  {
+    id: 1,
+    fullName: "Admin User",
+    email: "admin@example.com",
+    password: "password123", // Storing in plain text for simplicity in dummy data
+    role: "admin",
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 2,
+    fullName: "Test Customer",
+    email: "customer@example.com",
+    password: "password123",
+    role: "customer",
+    createdAt: new Date().toISOString()
+  }
+];
+
+/* -------------------------
+   Auth & User Routes
+-------------------------- */
+
+// Register a new user
+app.post("/api/auth/register", (req, res) => {
+  const { fullName, email, password } = req.body;
+
+  if (!fullName || !email || !password) {
+    return res.status(400).json({ success: false, message: "Missing required fields" });
+  }
+
+  // Check if user already exists
+  const existingUser = users.find((u) => u.email === email);
+  if (existingUser) {
+    return res.status(400).json({ success: false, message: "Email already registered" });
+  }
+
+  const newUser = {
+    id: users.length ? Math.max(...users.map((u) => u.id)) + 1 : 1,
+    fullName,
+    email,
+    password, 
+    role: "customer", // New signups are customers by default
+    createdAt: new Date().toISOString()
+  };
+
+  users.push(newUser);
+
+  // Return user without password
+  const { password: _, ...userWithoutPassword } = newUser;
+
+  res.status(201).json({
+    success: true,
+    message: "User registered successfully",
+    user: userWithoutPassword
+  });
+});
+
+// Login
+app.post("/api/auth/login", (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ success: false, message: "Email and password required" });
+  }
+
+  const user = users.find((u) => u.email === email && u.password === password);
+
+  if (!user) {
+    return res.status(401).json({ success: false, message: "Invalid email or password" });
+  }
+
+  const { password: _, ...userWithoutPassword } = user;
+
+  res.status(200).json({
+    success: true,
+    message: "Login successful",
+    user: userWithoutPassword
+  });
+});
+
+// Get all users (Admin)
+app.get("/api/users", (req, res) => {
+  // Return all users, stripping passwords
+  const safeUsers = users.map(({ password, ...u }) => u);
+  res.json(safeUsers);
+});
 
 /* -------------------------
    Health Check Route
@@ -112,9 +209,9 @@ app.get("/api/products/:id", (req, res) => {
    Add Product
 -------------------------- */
 app.post("/api/products", (req, res) => {
-  const { name, brand, category, type, price, sizes, image } = req.body;
+  const { name, brand, category, type, price, sizes, image, quantity } = req.body;
 
-  if (!name || !brand || !category || !type || !price || !image) {
+  if (!name || !brand || !category || !type || !price || !image || !quantity) {
     return res.status(400).json({
       success: false,
       message: "Missing product information"
@@ -128,6 +225,7 @@ app.post("/api/products", (req, res) => {
     category,
     type,
     price: Number(price),
+    quantity: quantity ?? 0,
     sizes: Array.isArray(sizes) ? sizes : [],
     image
   };
@@ -164,6 +262,33 @@ app.delete("/api/products/:id", (req, res) => {
 });
 
 /* -------------------------
+   Update Product
+-------------------------- */
+app.put("/api/products/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const { quantity, price } = req.body;
+
+  const product = products.find(p => p.id === id);
+
+  if (!product) {
+    return res.status(404).json({ success: false, message: "Not found" });
+  }
+
+  if (quantity !== undefined) {
+    if (quantity < 0) {
+      return res.status(400).json({ success: false, message: "Invalid quantity" });
+    }
+    product.quantity = quantity;
+  }
+
+  if (price !== undefined) {
+    product.price = price;
+  }
+
+  res.json({ success: true, product });
+});
+
+/* -------------------------
    Checkout Route
 -------------------------- */
 app.post("/api/checkout", (req, res) => {
@@ -191,6 +316,24 @@ app.post("/api/checkout", (req, res) => {
       message: "Customer information is incomplete"
     });
   }
+
+  //Validates inventory amount
+  for (let item of items) {
+    const product = products.find(p => p.id === item.id);
+
+    if (!product || product.quantity < item.quantity) {
+      return res.status(400).json({
+        success: false,
+        message: `We do not have the requested stock amount for ${item.name}`
+      });
+    }
+  }
+
+  //Reduces inventory based on item quantity
+  items.forEach(item => {
+    const product = products.find(p => p.id === item.id);
+    product.quantity -= item.quantity;
+  });
 
   const orderId = Math.floor(Math.random() * 1000000);
 
@@ -231,7 +374,7 @@ app.use((req, res) => {
 /* -------------------------
    Start Server
 -------------------------- */
-const PORT = 5000;
+const PORT = 5001;
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

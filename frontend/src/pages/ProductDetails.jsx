@@ -10,7 +10,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
+    fetch(`http://localhost:5001/api/products/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Product not found");
         return res.json();
@@ -135,7 +135,7 @@ export default function ProductDetails() {
           </div>
 
           <div style={{ marginTop: 12, opacity: 0.75 }}>
-            Tip: Try adding the same shoe twice to see quantity increase.
+            Description for different shoes - still need to add
           </div>
         </div>
       </div>
