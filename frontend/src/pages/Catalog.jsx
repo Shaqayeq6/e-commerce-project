@@ -3,27 +3,14 @@ import { Link } from "react-router-dom";
 
 export default function Catalog() {
   const [products, setProducts] = useState([]);
-<<<<<<< HEAD
-=======
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [brand, setBrand] = useState("All");
   const [sort, setSort] = useState("none");
 
   useEffect(() => {
-<<<<<<< HEAD
-    fetch("http://localhost:5000/api/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch(console.error);
-  }, []);
-
-  const brands = useMemo(() => {
-    const set = new Set(products.map((p) => p.brand));
-=======
     async function loadProducts() {
       try {
         setLoading(true);
@@ -55,54 +42,30 @@ export default function Catalog() {
 
   const brands = useMemo(() => {
     const set = new Set(products.map((p) => p.brand).filter(Boolean));
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
     return ["All", ...Array.from(set).sort()];
   }, [products]);
 
   const filtered = useMemo(() => {
     let result = [...products];
 
-<<<<<<< HEAD
-    // search
-=======
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
     const q = search.trim().toLowerCase();
     if (q) {
       result = result.filter(
         (p) =>
           p.name.toLowerCase().includes(q) ||
-<<<<<<< HEAD
-          p.brand.toLowerCase().includes(q)
-      );
-    }
-
-    // category filter
-=======
           p.brand.toLowerCase().includes(q) ||
           p.category.toLowerCase().includes(q)
       );
     }
 
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
     if (category !== "All") {
       result = result.filter((p) => p.category === category);
     }
 
-<<<<<<< HEAD
-    // brand filter
-=======
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
     if (brand !== "All") {
       result = result.filter((p) => p.brand === brand);
     }
 
-<<<<<<< HEAD
-    // sort
-    if (sort === "price_asc") result.sort((a, b) => a.price - b.price);
-    if (sort === "price_desc") result.sort((a, b) => b.price - a.price);
-    if (sort === "name_asc") result.sort((a, b) => a.name.localeCompare(b.name));
-    if (sort === "name_desc") result.sort((a, b) => b.name.localeCompare(a.name));
-=======
     if (sort === "price_asc") {
       result.sort((a, b) => a.price - b.price);
     }
@@ -118,109 +81,22 @@ export default function Catalog() {
     if (sort === "name_desc") {
       result.sort((a, b) => b.name.localeCompare(a.name));
     }
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
 
     return result;
   }, [products, search, category, brand, sort]);
 
   return (
-<<<<<<< HEAD
-    <div style={{ padding: 20 }}>
-      <h1>StepStyle Shoes</h1>
-
-      {/* Controls */}
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search shoes or brand..."
-          style={{ padding: 10, minWidth: 220 }}
-        />
-
-        <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ padding: 10 }}>
-          <option value="All">All</option>
-          <option value="Women">Women</option>
-          <option value="Men">Men</option>
-          <option value="Kids">Kids</option>
-        </select>
-
-        <select value={brand} onChange={(e) => setBrand(e.target.value)} style={{ padding: 10 }}>
-          {brands.map((b) => (
-            <option key={b} value={b}>{b}</option>
-          ))}
-        </select>
-
-        <select value={sort} onChange={(e) => setSort(e.target.value)} style={{ padding: 10 }}>
-          <option value="none">Sort: None</option>
-          <option value="price_asc">Price: Low → High</option>
-          <option value="price_desc">Price: High → Low</option>
-          <option value="name_asc">Name: A → Z</option>
-          <option value="name_desc">Name: Z → A</option>
-        </select>
-
-        <Link to="/cart" style={{ padding: 10, textDecoration: "none" }}>
-          Go to Cart →
-        </Link>
-      </div>
-
-      {/* Grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: 16
-        }}
-      >
-        {filtered.map((p) => (
-          <div
-            key={p.id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: 12,
-              padding: 14,
-              display: "flex",
-              flexDirection: "column",
-              gap: 8
-            }}
-          >
-            <img
-              src={p.image}
-              alt={p.name}
-              style={{
-                width: "100%",
-                height: 220,
-                objectFit: "cover",
-                borderRadius: 10
-              }}
-            />
-
-            <h3
-              style={{
-                margin: "10px 0 4px",
-                minHeight: 56
-              }}
-            >
-              {p.name}
-            </h3>
-
-            <div style={{ fontSize: 14, opacity: 0.8 }}>
-              {p.category} • {p.brand} • {p.type}
-            </div>
-
-            <div style={{ marginTop: 8, fontWeight: "bold" }}>
-              ${p.price.toFixed(2)}
-            </div>
-
-            <div style={{ marginTop: 10 }}>
-              <Link to={`/product/${p.id}`}>View Details</Link>
-            </div>
-          </div>
-        ))}
-      </div>
-=======
     <div style={{ padding: 24 }}>
       <div style={{ marginBottom: 24 }}>
-        <p style={{ margin: 0, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase", opacity: 0.7 }}>
+        <p
+          style={{
+            margin: 0,
+            fontSize: 14,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            opacity: 0.7
+          }}
+        >
           Shoe Store
         </p>
         <h1 style={{ margin: "8px 0 0" }}>ShaqaWear Shoes</h1>
@@ -241,7 +117,7 @@ export default function Catalog() {
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search shoes, brand, or category..."
+          placeholder="🔎 Search shoes, brand, or category..."
           style={{
             padding: 12,
             minWidth: 240,
@@ -253,15 +129,11 @@ export default function Catalog() {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          style={{
-            padding: 12,
-            borderRadius: 10,
-            border: "1px solid #ccc"
-          }}
+          style={{ padding: 12, borderRadius: 10, border: "1px solid #ccc" }}
         >
           {categories.map((c) => (
             <option key={c} value={c}>
-              {c}
+              {c === "All" ? "All Categories" : c}
             </option>
           ))}
         </select>
@@ -269,15 +141,11 @@ export default function Catalog() {
         <select
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
-          style={{
-            padding: 12,
-            borderRadius: 10,
-            border: "1px solid #ccc"
-          }}
+          style={{ padding: 12, borderRadius: 10, border: "1px solid #ccc" }}
         >
           {brands.map((b) => (
             <option key={b} value={b}>
-              {b}
+              {b === "All" ? "All Brands" : b}
             </option>
           ))}
         </select>
@@ -285,11 +153,7 @@ export default function Catalog() {
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          style={{
-            padding: 12,
-            borderRadius: 10,
-            border: "1px solid #ccc"
-          }}
+          style={{ padding: 12, borderRadius: 10, border: "1px solid #ccc" }}
         >
           <option value="none">Sort: None</option>
           <option value="price_asc">Price: Low to High</option>
@@ -314,9 +178,7 @@ export default function Catalog() {
 
       {loading && <p>Loading products...</p>}
 
-      {!loading && error && (
-        <p style={{ color: "crimson", fontWeight: 600 }}>{error}</p>
-      )}
+      {!loading && error && <p style={{ color: "crimson" }}>{error}</p>}
 
       {!loading && !error && filtered.length === 0 && (
         <p>No products match your search or filters.</p>
@@ -356,34 +218,24 @@ export default function Catalog() {
                 }}
               />
 
-              <div style={{ fontSize: 13, opacity: 0.7, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+              <div
+                style={{
+                  fontSize: 13,
+                  opacity: 0.7,
+                  textTransform: "uppercase"
+                }}
+              >
                 {p.category} • {p.brand}
               </div>
 
-              <h3
-                style={{
-                  margin: 0,
-                  minHeight: 52,
-                  fontSize: 20,
-                  lineHeight: 1.3
-                }}
-              >
-                {p.name}
-              </h3>
+              <h3 style={{ margin: 0, minHeight: 52 }}>{p.name}</h3>
 
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 14,
-                  opacity: 0.75,
-                  minHeight: 42
-                }}
-              >
+              <p style={{ margin: 0, fontSize: 14, opacity: 0.75 }}>
                 {p.description}
               </p>
 
               <div style={{ marginTop: "auto" }}>
-                <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 12 }}>
+                <div style={{ fontSize: 20, fontWeight: 700 }}>
                   ${Number(p.price).toFixed(2)}
                 </div>
 
@@ -395,7 +247,8 @@ export default function Catalog() {
                     textDecoration: "none",
                     background: "#111",
                     color: "#fff",
-                    borderRadius: 10
+                    borderRadius: 10,
+                    marginTop: 10
                   }}
                 >
                   View Details
@@ -405,7 +258,6 @@ export default function Catalog() {
           ))}
         </div>
       )}
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
     </div>
   );
 }

@@ -1,23 +1,11 @@
-<<<<<<< HEAD
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-=======
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    fetch("http://localhost:5000/api/orders")
-      .then((res) => res.json())
-      .then((data) => {
-        setOrders(data);
-=======
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -31,16 +19,12 @@ export default function Orders() {
         } else {
           setOrders([]);
         }
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
         setLoading(false);
       })
       .catch((err) => {
         console.error("Failed to load orders:", err);
         setLoading(false);
       });
-<<<<<<< HEAD
-  }, []);
-=======
   }, [user]);
 
   if (!user) {
@@ -54,7 +38,6 @@ export default function Orders() {
       </div>
     );
   }
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
 
   return (
     <div style={{ padding: 20, maxWidth: 1000, margin: "0 auto" }}>
