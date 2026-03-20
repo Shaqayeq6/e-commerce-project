@@ -188,8 +188,10 @@ export default function Catalog() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-            gap: 18
+            gridTemplateColumns: "repeat(auto-fill, 240px)",
+            
+            gap: 18,
+            justifyContent: "start"
           }}
         >
           {filtered.map((p) => (

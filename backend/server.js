@@ -75,6 +75,39 @@ let products = [
     quantity: 7,
     sizes: [6, 7, 8, 9, 10, 11],
     image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80&auto=format"
+  },
+  {
+    id: 7,
+    name: "Slouch Boots",
+    brand: "Fendi",
+    category: "Women",
+    type: "Boots",
+    price: 220.99,
+    quantity: 6,
+    sizes: [7, 8, 9, 10],
+    image: "https://images.unsplash.com/photo-1763661300203-aa3e2702f510?w=600&q=80&auto=format"
+  },
+  {
+    id: 8,
+    name: "1460 Vintage",
+    brand: "Doc Martens",
+    category: "Women",
+    type: "Boots",
+    price: 250.99,
+    quantity: 10,
+    sizes: [7, 8, 9, 10, 11],
+    image: "https://images.unsplash.com/photo-1635665695341-b09261fcffc8?w=600&q=80&auto=format"
+  },
+  {
+    id: 9,
+    name: "Original Hightop",
+    brand: "Vans",
+    category: "Kids",
+    type: "Sneaker",
+    price: 60.99,
+    quantity: 10,
+    sizes: [4, 5, 6, 7],
+    image: "https://images.unsplash.com/photo-1667397310866-dd13e0ccb5eb?w=600&q=80&auto=format"
   }
 ];
 
