@@ -19,6 +19,7 @@ export function CartProvider({ children }) {
 
   const clearCart = () => setCart([]);
 
+  // add to cart considering chosen quantity
   const addToCart = (product, qty = 1) => {
     const key = getKey(product);
 
@@ -26,10 +27,10 @@ export function CartProvider({ children }) {
       const existing = prev.find((item) => item.key === key);
 
       const currentQty = existing ? existing.quantity : 0;
-      const stock = product.quantity; // available stock
+      const stock = product.quantity;
 
-      // prevent users from exceeding stock amount
-      if (currentQty + 1 > stock) {
+      // check for exceeding stock
+      if (currentQty + qty > stock) {
         alert("Cannot add more than available stock");
         return prev;
       }
@@ -37,25 +38,33 @@ export function CartProvider({ children }) {
       if (existing) {
         return prev.map((item) =>
           item.key === key
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + qty } 
             : item
         );
       }
 
-      // store stock in cart item for future checks
-      return [...prev, { ...product, key, quantity: 1, stock }];
+      return [
+        ...prev,
+        {
+          ...product,
+          key,
+          quantity: qty, 
+          stock
+        }
+      ];
     });
   };
 
+  //remove from cart
   const removeFromCart = (key) => {
     setCart((prev) => prev.filter((item) => item.key !== key));
   };
 
+  //increase chosen quantity
   const increaseQty = (key) => {
     setCart((prev) =>
       prev.map((item) => {
         if (item.key === key) {
-          // prevent users from exceeding stock amount
           if (item.quantity + 1 > item.stock) {
             alert("Cannot exceed available stock");
             return item;

@@ -30,7 +30,7 @@ export default function ProductDetails() {
       });
   }, [id]);
 
-  // ✅ Hooks MUST be before any return
+  // Hooks MUST be before any return
   const currentInCart = useMemo(() => {
     if (!product) return 0;
 
