@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar() {
   const { totalItems } = useContext(CartContext);
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   return (
     <nav
@@ -26,22 +26,19 @@ export default function Navbar() {
       </Link>
 
       <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-        
-        {/* Admin Links */}
         {user && user.role === "admin" && (
           <Link
-            to="/admin/customers"
+            to="/admin"
             style={{
               color: "#ffeb3b",
               textDecoration: "none",
               fontWeight: "bold"
             }}
           >
-            Admin: Customers
+            Admin Panel
           </Link>
         )}
 
-        {/* Regular User / Guest Links */}
         <Link
           to="/orders"
           style={{ color: "white", textDecoration: "none" }}
@@ -50,12 +47,32 @@ export default function Navbar() {
         </Link>
 
         {user ? (
-          <Link
-            to="/profile"
-            style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}
-          >
-            Hi, {user.fullName.split(" ")[0]} (Profile)
-          </Link>
+          <>
+            <Link
+              to="/profile"
+              style={{
+                color: "white",
+                textDecoration: "none",
+                fontWeight: "bold"
+              }}
+            >
+              Hi, {user.fullName.split(" ")[0]} (Profile)
+            </Link>
+
+            <button
+              onClick={logout}
+              style={{
+                background: "transparent",
+                border: "1px solid white",
+                color: "white",
+                padding: "6px 10px",
+                borderRadius: "8px",
+                cursor: "pointer"
+              }}
+            >
+              Logout
+            </button>
+          </>
         ) : (
           <Link
             to="/login"

@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Admin() {
+  const { user } = useContext(AuthContext);
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,17 +14,14 @@ export default function Admin() {
     category: "",
     type: "",
     price: "",
+    quantity: "",
     sizes: "",
     image: ""
   });
 
   const loadProducts = async () => {
     try {
-<<<<<<< HEAD
-      const res = await fetch("http://localhost:5000/api/products");
-=======
       const res = await fetch("http://localhost:5001/api/products");
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -32,8 +32,10 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    loadProducts();
-  }, []);
+    if (user && user.role === "admin") {
+      loadProducts();
+    }
+  }, [user]);
 
   const onChange = (e) => {
     setForm((prev) => ({
@@ -49,17 +51,14 @@ export default function Admin() {
       const payload = {
         ...form,
         price: Number(form.price),
+        quantity: Number(form.quantity),
         sizes: form.sizes
           .split(",")
           .map((s) => Number(s.trim()))
           .filter((n) => !Number.isNaN(n))
       };
 
-<<<<<<< HEAD
-      const res = await fetch("http://localhost:5000/api/products", {
-=======
       const res = await fetch("http://localhost:5001/api/products", {
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -80,6 +79,7 @@ export default function Admin() {
         category: "",
         type: "",
         price: "",
+        quantity: "",
         sizes: "",
         image: ""
       });
@@ -96,11 +96,7 @@ export default function Admin() {
     if (!confirmed) return;
 
     try {
-<<<<<<< HEAD
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
-=======
       const res = await fetch(`http://localhost:5001/api/products/${id}`, {
->>>>>>> fc1a1d91797f588c2457599d245a0e8c297f02b7
         method: "DELETE"
       });
 
@@ -118,6 +114,16 @@ export default function Admin() {
     }
   };
 
+  if (!user || user.role !== "admin") {
+    return (
+      <div style={{ padding: 20, maxWidth: 900, margin: "0 auto" }}>
+        <h1>Access Denied</h1>
+        <p>You must be logged in as admin to view this page.</p>
+        <Link to="/">⬅ Back to Store</Link>
+      </div>
+    );
+  }
+
   return (
     <div style={{ padding: 20, maxWidth: 1100, margin: "0 auto" }}>
       <h1 style={{ marginBottom: 20 }}>Admin Panel</h1>
@@ -133,6 +139,7 @@ export default function Admin() {
           gap: 24
         }}
       >
+        {/* ---------------- Add Product Form ---------------- */}
         <form
           onSubmit={addProduct}
           style={{
@@ -184,6 +191,14 @@ export default function Admin() {
           />
 
           <input
+            name="quantity"
+            placeholder="Quantity"
+            value={form.quantity}
+            onChange={onChange}
+            style={{ width: "100%", padding: 10, marginBottom: 12 }}
+          />
+
+          <input
             name="sizes"
             placeholder="Sizes (example: 6,7,8,9)"
             value={form.sizes}
@@ -214,6 +229,7 @@ export default function Admin() {
           </button>
         </form>
 
+        {/* ---------------- Product List ---------------- */}
         <div
           style={{
             border: "1px solid #ddd",
@@ -238,16 +254,36 @@ export default function Admin() {
                     alignItems: "center",
                     border: "1px solid #eee",
                     borderRadius: 10,
-                    padding: 12
+                    padding: 12,
+                    gap: 16
                   }}
                 >
-                  <div>
-                    <div style={{ fontWeight: "bold" }}>{product.name}</div>
-                    <div style={{ fontSize: 13, opacity: 0.8 }}>
-                      {product.brand} • {product.category} • {product.type}
-                    </div>
-                    <div style={{ fontSize: 13 }}>
-                      ${Number(product.price).toFixed(2)}
+                  <div style={{ display: "flex", gap: 16 }}>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      style={{
+                        width: 100,
+                        height: 100,
+                        objectFit: "cover",
+                        borderRadius: 10
+                      }}
+                    />
+
+                    <div>
+                      <div style={{ fontWeight: "bold" }}>{product.name}</div>
+                      <div style={{ fontSize: 13, opacity: 0.8 }}>
+                        {product.brand} • {product.category} • {product.type}
+                      </div>
+                      <div style={{ fontSize: 13 }}>
+                        ${Number(product.price).toFixed(2)}
+                      </div>
+                      <div style={{ fontSize: 13 }}>
+                        Quantity: {product.quantity}
+                      </div>
+                      <div style={{ fontSize: 13 }}>
+                        Sizes: {product.sizes.join(", ")}
+                      </div>
                     </div>
                   </div>
 

@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Customers from "./pages/Customers";
+import Admin from "./pages/Admin";
 
 export default function App() {
   return (
@@ -26,8 +27,10 @@ export default function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        
         <Route path="/profile" element={<Profile />} />
         <Route path="/admin/customers" element={<Customers />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
