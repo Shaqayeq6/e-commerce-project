@@ -24,26 +24,27 @@ export default function Checkout() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  /* ── Shipping form ── */
   const [form, setForm] = useState({
     fullName: user ? user.fullName : "",
     email: user ? user.email : "",
-    address: "",
-    city: "",
-    postalCode: ""
+    address: user?.address || "",
+    city: user?.city || "",
+    postalCode: user?.postalCode || ""
   });
 
   useEffect(() => {
     if (user) {
       setForm((prev) => ({
         ...prev,
-        fullName: prev.fullName || user.fullName,
-        email: user.email
+        fullName: user.fullName || prev.fullName,
+        email: user.email || prev.email,
+        address: user.address || prev.address,
+        city: user.city || prev.city,
+        postalCode: user.postalCode || prev.postalCode
       }));
     }
   }, [user]);
 
-  /* ── Payment form ── */
   const [payment, setPayment] = useState({
     cardNumber: "",
     nameOnCard: "",
@@ -156,12 +157,15 @@ export default function Checkout() {
       {cart.length === 0 ? (
         <p>Your cart is empty. Add items before checkout.</p>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "start" }}>
-          
-          {/* Left Column */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 24,
+            alignItems: "start"
+          }}
+        >
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            
-            {/* Shipping */}
             <div style={{ border: "1px solid #ddd", borderRadius: 12, padding: 20 }}>
               <h2 style={{ marginBottom: 16 }}>📦 Shipping Info</h2>
 
@@ -187,7 +191,6 @@ export default function Checkout() {
               <input name="postalCode" value={form.postalCode} onChange={onShippingChange} style={inputStyle} />
             </div>
 
-            {/* Payment */}
             <div style={{ border: "1px solid #ddd", borderRadius: 12, padding: 20 }}>
               <h2>💳 Payment</h2>
 
@@ -223,12 +226,14 @@ export default function Checkout() {
             </div>
           </div>
 
-          {/* Right Column */}
           <div style={{ border: "1px solid #ddd", borderRadius: 12, padding: 20 }}>
             <h2>🧾 Order Summary</h2>
 
             {cart.map((item) => (
-              <div key={item.key} style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+              <div
+                key={item.key}
+                style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}
+              >
                 <div>
                   <div>{item.name}</div>
                   <div style={{ fontSize: 13 }}>
@@ -243,7 +248,6 @@ export default function Checkout() {
             <hr />
             <h3>Total: ${totalPrice.toFixed(2)}</h3>
           </div>
-
         </div>
       )}
     </div>

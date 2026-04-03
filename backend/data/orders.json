@@ -1,0 +1,64 @@
+[
+  {
+    "orderId": 518972,
+    "customer": {
+      "fullName": "Elara",
+      "email": "Elara@example.com",
+      "address": "5 lenvalley st",
+      "city": "Toronto",
+      "postalCode": "M1C 4GV"
+    },
+    "items": [
+      {
+        "id": 2,
+        "name": "Old Skool Shoe",
+        "brand": "Vans",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 109.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format",
+        "description": "Classic Vans silhouette with a timeless streetwear vibe.",
+        "selectedSize": "8",
+        "key": "2-8",
+        "stock": 8
+      },
+      {
+        "id": 6,
+        "name": "Air Force 1 Shadow",
+        "brand": "Nike",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 79.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80&auto=format",
+        "description": "Iconic Air Force style with a bold modern twist.",
+        "selectedSize": "6",
+        "key": "6-6",
+        "stock": 7
+      }
+    ],
+    "total": 189.98,
+    "paymentMethod": {
+      "last4": "3664",
+      "nameOnCard": "Ealara"
+    },
+    "createdAt": "2026-04-03T19:04:23.033Z"
+  }
+]

@@ -27,10 +27,9 @@ export default function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
         <Route path="/profile" element={<Profile />} />
-        <Route path="/admin/customers" element={<Customers />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/customers" element={<Customers />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,173 +1,85 @@
 const express = require("express");
 const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-/* -------------------------
-   Dummy Product Data
--------------------------- */
-let products = [
-  {
-    id: 1,
-    name: "AirFlex Runner",
-    brand: "Nike",
-    category: "Men",
-    type: "Running",
-    price: 129.99,
-    quantity: 10,
-    sizes: [7, 8, 9, 10, 11, 12],
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format"
-  },
-  {
-    id: 2,
-    name: "Old Skool Shoe",
-    brand: "Vans",
-    category: "Women",
-    type: "Sneaker",
-    price: 109.99,
-    quantity: 8,
-    sizes: [6, 7, 8, 9, 10, 11],
-    image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format"
-  },
-  {
-    id: 3,
-    name: "Air Max 1 Ultra",
-    brand: "Nike",
-    category: "Men",
-    type: "Running",
-    price: 149.99,
-    quantity: 5,
-    sizes: [8, 9, 10, 11, 12],
-    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&q=80&auto=format"
-  },
-  {
-    id: 4,
-    name: "Jada Classic",
-    brand: "Puma",
-    category: "Women",
-    type: "Sneaker",
-    price: 99.99,
-    quantity: 12,
-    sizes: [6, 7, 8, 9, 10, 11],
-    image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format"
-  },
-  {
-    id: 5,
-    name: "KidsSprint",
-    brand: "Puma",
-    category: "Kids",
-    type: "Sport",
-    price: 49.99,
-    quantity: 15,
-    sizes: [1, 2, 3, 4],
-    image: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?w=600&q=80&auto=format"
-  },
-  {
-    id: 6,
-    name: "Air Force 1 Shadow",
-    brand: "Nike",
-    category: "Women",
-    type: "Sneaker",
-    price: 79.99,
-    quantity: 7,
-    sizes: [6, 7, 8, 9, 10, 11],
-    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80&auto=format"
-  },
-  {
-    id: 7,
-    name: "Slouch Boots",
-    brand: "Fendi",
-    category: "Women",
-    type: "Boots",
-    price: 220.99,
-    quantity: 6,
-    sizes: [7, 8, 9, 10],
-    image: "https://images.unsplash.com/photo-1763661300203-aa3e2702f510?w=600&q=80&auto=format"
-  },
-  {
-    id: 8,
-    name: "1460 Vintage",
-    brand: "Doc Martens",
-    category: "Women",
-    type: "Boots",
-    price: 250.99,
-    quantity: 10,
-    sizes: [7, 8, 9, 10, 11],
-    image: "https://images.unsplash.com/photo-1635665695341-b09261fcffc8?w=600&q=80&auto=format"
-  },
-  {
-    id: 9,
-    name: "Original Hightop",
-    brand: "Vans",
-    category: "Kids",
-    type: "Sneaker",
-    price: 60.99,
-    quantity: 10,
-    sizes: [4, 5, 6, 7],
-    image: "https://images.unsplash.com/photo-1667397310866-dd13e0ccb5eb?w=600&q=80&auto=format"
+const PORT = 5001;
+
+const dataDir = path.join(__dirname, "data");
+const usersPath = path.join(dataDir, "users.json");
+const ordersPath = path.join(dataDir, "orders.json");
+const productsPath = path.join(dataDir, "products.json");
+
+function ensureFile(filePath, defaultData) {
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, JSON.stringify(defaultData, null, 2));
   }
-];
+}
+
+function readData(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+}
+
+function writeData(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
+
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir);
+}
+
+ensureFile(usersPath, []);
+ensureFile(ordersPath, []);
+ensureFile(productsPath, []);
 
 /* -------------------------
-   In-Memory Orders
--------------------------- */
-const orders = [];
-
-/* -------------------------
-   In-Memory Users
--------------------------- */
-let users = [
-  {
-    id: 1,
-    fullName: "Admin User",
-    email: "admin@example.com",
-    password: "password123", // Storing in plain text for simplicity in dummy data
-    role: "admin",
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 2,
-    fullName: "Test Customer",
-    email: "customer@example.com",
-    password: "password123",
-    role: "customer",
-    createdAt: new Date().toISOString()
-  }
-];
-
-/* -------------------------
-   Auth & User Routes
+   Auth Routes
 -------------------------- */
 
-// Register a new user
+// Register
 app.post("/api/auth/register", (req, res) => {
+  const users = readData(usersPath);
   const { fullName, email, password } = req.body;
 
   if (!fullName || !email || !password) {
-    return res.status(400).json({ success: false, message: "Missing required fields" });
+    return res.status(400).json({
+      success: false,
+      message: "Missing required fields"
+    });
   }
 
-  // Check if user already exists
-  const existingUser = users.find((u) => u.email === email);
+  const existingUser = users.find(
+    (u) => u.email.toLowerCase() === email.toLowerCase()
+  );
+
   if (existingUser) {
-    return res.status(400).json({ success: false, message: "Email already registered" });
+    return res.status(400).json({
+      success: false,
+      message: "Email already registered"
+    });
   }
 
   const newUser = {
     id: users.length ? Math.max(...users.map((u) => u.id)) + 1 : 1,
     fullName,
     email,
-    password, 
-    role: "customer", // New signups are customers by default
+    password,
+    role: "customer",
+    address: "",
+    city: "",
+    postalCode: "",
+    cardLast4: "",
     createdAt: new Date().toISOString()
   };
 
   users.push(newUser);
+  writeData(usersPath, users);
 
-  // Return user without password
   const { password: _, ...userWithoutPassword } = newUser;
 
   res.status(201).json({
@@ -179,16 +91,25 @@ app.post("/api/auth/register", (req, res) => {
 
 // Login
 app.post("/api/auth/login", (req, res) => {
+  const users = readData(usersPath);
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ success: false, message: "Email and password required" });
+    return res.status(400).json({
+      success: false,
+      message: "Email and password required"
+    });
   }
 
-  const user = users.find((u) => u.email === email && u.password === password);
+  const user = users.find(
+    (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
+  );
 
   if (!user) {
-    return res.status(401).json({ success: false, message: "Invalid email or password" });
+    return res.status(401).json({
+      success: false,
+      message: "Invalid email or password"
+    });
   }
 
   const { password: _, ...userWithoutPassword } = user;
@@ -200,32 +121,96 @@ app.post("/api/auth/login", (req, res) => {
   });
 });
 
-// Get all users (Admin)
+/* -------------------------
+   Users
+-------------------------- */
+
+// Get all users
 app.get("/api/users", (req, res) => {
-  // Return all users, stripping passwords
+  const users = readData(usersPath);
   const safeUsers = users.map(({ password, ...u }) => u);
   res.json(safeUsers);
 });
 
-/* -------------------------
-   Health Check Route
--------------------------- */
-app.get("/api/health", (req, res) => {
-  res.json({ status: "Backend is running!" });
+// Update user
+app.put("/api/users/:id", (req, res) => {
+  const users = readData(usersPath);
+  const id = Number(req.params.id);
+
+  const {
+    fullName,
+    email,
+    role,
+    address = "",
+    city = "",
+    postalCode = "",
+    cardLast4 = ""
+  } = req.body;
+
+  const userIndex = users.findIndex((u) => u.id === id);
+
+  if (userIndex === -1) {
+    return res.status(404).json({
+      success: false,
+      message: "User not found"
+    });
+  }
+
+  if (!fullName || !email || !role) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing required user fields"
+    });
+  }
+
+  const emailTaken = users.find(
+    (u) => u.email.toLowerCase() === email.toLowerCase() && u.id !== id
+  );
+
+  if (emailTaken) {
+    return res.status(400).json({
+      success: false,
+      message: "Email is already in use"
+    });
+  }
+
+  users[userIndex] = {
+    ...users[userIndex],
+    fullName,
+    email,
+    role,
+    address,
+    city,
+    postalCode,
+    cardLast4
+  };
+
+  writeData(usersPath, users);
+
+  const { password: _, ...updatedUser } = users[userIndex];
+
+  res.json({
+    success: true,
+    message: "User updated successfully",
+    user: updatedUser
+  });
 });
 
 /* -------------------------
-   Get All Products
+   Products
 -------------------------- */
+
+// Get all products
 app.get("/api/products", (req, res) => {
+  const products = readData(productsPath);
   res.json(products);
 });
 
-/* -------------------------
-   Get Product By ID
--------------------------- */
+// Get product by id
 app.get("/api/products/:id", (req, res) => {
+  const products = readData(productsPath);
   const id = Number(req.params.id);
+
   const product = products.find((p) => p.id === id);
 
   if (!product) {
@@ -238,13 +223,12 @@ app.get("/api/products/:id", (req, res) => {
   res.json(product);
 });
 
-/* -------------------------
-   Add Product
--------------------------- */
+// Add product
 app.post("/api/products", (req, res) => {
-  const { name, brand, category, type, price, sizes, image, quantity } = req.body;
+  const products = readData(productsPath);
+  const { name, brand, category, type, price, sizes, image, quantity, description } = req.body;
 
-  if (!name || !brand || !category || !type || !price || !image || !quantity) {
+  if (!name || !brand || !category || !type || !price || !image || quantity === undefined) {
     return res.status(400).json({
       success: false,
       message: "Missing product information"
@@ -258,12 +242,14 @@ app.post("/api/products", (req, res) => {
     category,
     type,
     price: Number(price),
-    quantity: quantity ?? 0,
+    quantity: Number(quantity),
     sizes: Array.isArray(sizes) ? sizes : [],
-    image
+    image,
+    description: description || ""
   };
 
   products.push(newProduct);
+  writeData(productsPath, products);
 
   res.status(201).json({
     success: true,
@@ -272,11 +258,11 @@ app.post("/api/products", (req, res) => {
   });
 });
 
-/* -------------------------
-   Delete Product
--------------------------- */
+// Delete product
 app.delete("/api/products/:id", (req, res) => {
+  const products = readData(productsPath);
   const id = Number(req.params.id);
+
   const existingProduct = products.find((p) => p.id === id);
 
   if (!existingProduct) {
@@ -286,7 +272,8 @@ app.delete("/api/products/:id", (req, res) => {
     });
   }
 
-  products = products.filter((p) => p.id !== id);
+  const updatedProducts = products.filter((p) => p.id !== id);
+  writeData(productsPath, updatedProducts);
 
   res.json({
     success: true,
@@ -294,41 +281,53 @@ app.delete("/api/products/:id", (req, res) => {
   });
 });
 
-/* -------------------------
-   Update Product
--------------------------- */
+// Update product
 app.put("/api/products/:id", (req, res) => {
+  const products = readData(productsPath);
   const id = Number(req.params.id);
   const { quantity, price } = req.body;
 
-  const product = products.find(p => p.id === id);
+  const productIndex = products.findIndex((p) => p.id === id);
 
-  if (!product) {
-    return res.status(404).json({ success: false, message: "Not found" });
+  if (productIndex === -1) {
+    return res.status(404).json({
+      success: false,
+      message: "Not found"
+    });
   }
 
   if (quantity !== undefined) {
-    if (quantity < 0) {
-      return res.status(400).json({ success: false, message: "Invalid quantity" });
+    if (Number(quantity) < 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid quantity"
+      });
     }
-    product.quantity = quantity;
+    products[productIndex].quantity = Number(quantity);
   }
 
   if (price !== undefined) {
-    product.price = price;
+    products[productIndex].price = Number(price);
   }
 
-  res.json({ success: true, product });
+  writeData(productsPath, products);
+
+  res.json({
+    success: true,
+    product: products[productIndex]
+  });
 });
 
 /* -------------------------
-   Checkout Route
+   Checkout
 -------------------------- */
-app.post("/api/checkout", (req, res) => {
-  console.log("Checkout route hit");
-  console.log("Request body:", req.body);
 
-  const { customer, items, total } = req.body;
+app.post("/api/checkout", (req, res) => {
+  const orders = readData(ordersPath);
+  const users = readData(usersPath);
+  const products = readData(productsPath);
+
+  const { customer, items, total, paymentMethod } = req.body;
 
   if (!customer || !items || !Array.isArray(items) || items.length === 0 || !total) {
     return res.status(400).json({
@@ -350,9 +349,8 @@ app.post("/api/checkout", (req, res) => {
     });
   }
 
-  //Validates inventory amount
-  for (let item of items) {
-    const product = products.find(p => p.id === item.id);
+  for (const item of items) {
+    const product = products.find((p) => p.id === item.id);
 
     if (!product || product.quantity < item.quantity) {
       return res.status(400).json({
@@ -362,11 +360,26 @@ app.post("/api/checkout", (req, res) => {
     }
   }
 
-  //Reduces inventory based on item quantity
-  items.forEach(item => {
-    const product = products.find(p => p.id === item.id);
+  for (const item of items) {
+    const product = products.find((p) => p.id === item.id);
     product.quantity -= item.quantity;
-  });
+  }
+
+  const existingUserIndex = users.findIndex(
+    (u) => u.email.toLowerCase() === customer.email.toLowerCase()
+  );
+
+  if (existingUserIndex !== -1) {
+    users[existingUserIndex] = {
+      ...users[existingUserIndex],
+      fullName: customer.fullName,
+      email: customer.email,
+      address: customer.address,
+      city: customer.city,
+      postalCode: customer.postalCode,
+      cardLast4: paymentMethod?.last4 || users[existingUserIndex].cardLast4
+    };
+  }
 
   const orderId = Math.floor(Math.random() * 1000000);
 
@@ -375,12 +388,17 @@ app.post("/api/checkout", (req, res) => {
     customer,
     items,
     total,
+    paymentMethod,
     createdAt: new Date().toISOString()
   };
 
   orders.push(newOrder);
 
-  return res.status(200).json({
+  writeData(productsPath, products);
+  writeData(usersPath, users);
+  writeData(ordersPath, orders);
+
+  res.status(200).json({
     success: true,
     message: "Payment authorized",
     orderId
@@ -388,15 +406,26 @@ app.post("/api/checkout", (req, res) => {
 });
 
 /* -------------------------
-   Get All Orders
+   Orders
 -------------------------- */
+
 app.get("/api/orders", (req, res) => {
+  const orders = readData(ordersPath);
   res.json(orders);
 });
 
 /* -------------------------
-   Fallback Route
+   Health
 -------------------------- */
+
+app.get("/api/health", (req, res) => {
+  res.json({ status: "Backend is running!" });
+});
+
+/* -------------------------
+   Fallback
+-------------------------- */
+
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -407,7 +436,6 @@ app.use((req, res) => {
 /* -------------------------
    Start Server
 -------------------------- */
-const PORT = 5001;
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

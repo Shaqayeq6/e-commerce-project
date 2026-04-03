@@ -27,16 +27,40 @@ export default function Navbar() {
 
       <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
         {user && user.role === "admin" && (
-          <Link
-            to="/admin"
-            style={{
-              color: "#ffeb3b",
-              textDecoration: "none",
-              fontWeight: "bold"
-            }}
-          >
-            Admin Panel
-          </Link>
+          <>
+            <Link
+              to="/admin"
+              style={{
+                color: "#ffeb3b",
+                textDecoration: "none",
+                fontWeight: "bold"
+              }}
+            >
+              Admin Panel
+            </Link>
+
+            <Link
+              to="/admin/customers"
+              style={{
+                color: "#ffeb3b",
+                textDecoration: "none",
+                fontWeight: "bold"
+              }}
+            >
+              Users
+            </Link>
+
+            <Link
+              to="/orders"
+              style={{
+                color: "#ffeb3b",
+                textDecoration: "none",
+                fontWeight: "bold"
+              }}
+            >
+              Sales History
+            </Link>
+          </>
         )}
 
         <Link

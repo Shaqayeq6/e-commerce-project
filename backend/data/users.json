@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "fullName": "Admin User",
+    "email": "admin@example.com",
+    "password": "password123",
+    "role": "admin",
+    "address": "",
+    "city": "",
+    "postalCode": "",
+    "cardLast4": "",
+    "createdAt": "2026-03-31T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "fullName": "Test Customer",
+    "email": "customer@example.com",
+    "password": "password123",
+    "role": "customer",
+    "address": "",
+    "city": "",
+    "postalCode": "",
+    "cardLast4": "",
+    "createdAt": "2026-03-31T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "fullName": "Elara",
+    "email": "Elara@example.com",
+    "password": "1234",
+    "role": "customer",
+    "address": "5 lenvalley st",
+    "city": "Toronto",
+    "postalCode": "M1C 4GV",
+    "cardLast4": "3664",
+    "createdAt": "2026-04-03T19:00:44.871Z"
+  }
+]

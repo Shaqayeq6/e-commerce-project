@@ -114,6 +114,37 @@ export default function Admin() {
     }
   };
 
+  const updateInventory = async (product, newQuantity) => {
+    if (newQuantity < 0) return;
+
+    try {
+      const res = await fetch(`http://localhost:5001/api/products/${product.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          quantity: newQuantity,
+          price: product.price
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        alert(data.message || "Failed to update inventory");
+        return;
+      }
+
+      setProducts((prev) =>
+        prev.map((p) => (p.id === product.id ? data.product : p))
+      );
+    } catch (err) {
+      console.error("Update inventory error:", err);
+      alert("Failed to update inventory");
+    }
+  };
+
   if (!user || user.role !== "admin") {
     return (
       <div style={{ padding: 20, maxWidth: 900, margin: "0 auto" }}>
@@ -139,7 +170,6 @@ export default function Admin() {
           gap: 24
         }}
       >
-        {/* ---------------- Add Product Form ---------------- */}
         <form
           onSubmit={addProduct}
           style={{
@@ -229,7 +259,6 @@ export default function Admin() {
           </button>
         </form>
 
-        {/* ---------------- Product List ---------------- */}
         <div
           style={{
             border: "1px solid #ddd",
@@ -278,10 +307,50 @@ export default function Admin() {
                       <div style={{ fontSize: 13 }}>
                         ${Number(product.price).toFixed(2)}
                       </div>
-                      <div style={{ fontSize: 13 }}>
-                        Quantity: {product.quantity}
+                      <div style={{ fontSize: 13, marginTop: 6 }}>
+                        <strong>Quantity:</strong> {product.quantity}
                       </div>
-                      <div style={{ fontSize: 13 }}>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: 8,
+                          marginTop: 8,
+                          alignItems: "center"
+                        }}
+                      >
+                        <button
+                          onClick={() =>
+                            updateInventory(product, product.quantity - 1)
+                          }
+                          style={{
+                            padding: "6px 10px",
+                            borderRadius: 8,
+                            border: "1px solid #ccc",
+                            background: "white",
+                            cursor: "pointer"
+                          }}
+                        >
+                          -1
+                        </button>
+
+                        <button
+                          onClick={() =>
+                            updateInventory(product, product.quantity + 1)
+                          }
+                          style={{
+                            padding: "6px 10px",
+                            borderRadius: 8,
+                            border: "1px solid #ccc",
+                            background: "white",
+                            cursor: "pointer"
+                          }}
+                        >
+                          +1
+                        </button>
+                      </div>
+
+                      <div style={{ fontSize: 13, marginTop: 8 }}>
                         Sizes: {product.sizes.join(", ")}
                       </div>
                     </div>
