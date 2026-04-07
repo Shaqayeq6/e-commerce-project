@@ -19,6 +19,31 @@ export default function Admin() {
     image: ""
   });
 
+  const [editingProduct, setEditingProduct] = useState(null);
+
+  const saveEdit = async () => {
+    try {
+      const res = await fetch(`http://localhost:5001/api/products/${editingProduct.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          price: Number(editingProduct.price),
+          quantity: Number(editingProduct.quantity)
+        })
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        alert(data.message || "Failed to edit product");
+        return;
+      }
+      setEditingProduct(null);
+      loadProducts();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to edit product");
+    }
+  };
+
   const loadProducts = async () => {
     try {
       const res = await fetch("http://localhost:5001/api/products");
@@ -114,37 +139,6 @@ export default function Admin() {
     }
   };
 
-  const updateInventory = async (product, newQuantity) => {
-    if (newQuantity < 0) return;
-
-    try {
-      const res = await fetch(`http://localhost:5001/api/products/${product.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          quantity: newQuantity,
-          price: product.price
-        })
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        alert(data.message || "Failed to update inventory");
-        return;
-      }
-
-      setProducts((prev) =>
-        prev.map((p) => (p.id === product.id ? data.product : p))
-      );
-    } catch (err) {
-      console.error("Update inventory error:", err);
-      alert("Failed to update inventory");
-    }
-  };
-
   if (!user || user.role !== "admin") {
     return (
       <div style={{ padding: 20, maxWidth: 900, margin: "0 auto" }}>
@@ -170,6 +164,7 @@ export default function Admin() {
           gap: 24
         }}
       >
+        {/* ---------------- Add Product Form ---------------- */}
         <form
           onSubmit={addProduct}
           style={{
@@ -259,6 +254,7 @@ export default function Admin() {
           </button>
         </form>
 
+        {/* ---------------- Product List ---------------- */}
         <div
           style={{
             border: "1px solid #ddd",
@@ -299,76 +295,54 @@ export default function Admin() {
                       }}
                     />
 
-                    <div>
-                      <div style={{ fontWeight: "bold" }}>{product.name}</div>
-                      <div style={{ fontSize: 13, opacity: 0.8 }}>
-                        {product.brand} • {product.category} • {product.type}
+                    {editingProduct && editingProduct.id === product.id ? (
+                      <div style={{display: "flex", flexDirection: "column", gap: 8}}>
+                        <div style={{ fontWeight: "bold" }}>{product.name}</div>
+                        <label style={{fontSize: 12}}>Price: <input value={editingProduct.price} onChange={e => setEditingProduct({...editingProduct, price: e.target.value})} style={{width: 60}} /></label>
+                        <label style={{fontSize: 12}}>Qty: <input value={editingProduct.quantity} onChange={e => setEditingProduct({...editingProduct, quantity: e.target.value})} style={{width: 60}} /></label>
                       </div>
-                      <div style={{ fontSize: 13 }}>
-                        ${Number(product.price).toFixed(2)}
+                    ) : (
+                      <div>
+                        <div style={{ fontWeight: "bold" }}>{product.name}</div>
+                        <div style={{ fontSize: 13, opacity: 0.8 }}>
+                          {product.brand} • {product.category} • {product.type}
+                        </div>
+                        <div style={{ fontSize: 13 }}>
+                          ${Number(product.price).toFixed(2)}
+                        </div>
+                        <div style={{ fontSize: 13 }}>
+                          Quantity: {product.quantity}
+                        </div>
+                        <div style={{ fontSize: 13 }}>
+                          Sizes: {product.sizes.join(", ")}
+                        </div>
                       </div>
-                      <div style={{ fontSize: 13, marginTop: 6 }}>
-                        <strong>Quantity:</strong> {product.quantity}
-                      </div>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: 8,
-                          marginTop: 8,
-                          alignItems: "center"
-                        }}
-                      >
-                        <button
-                          onClick={() =>
-                            updateInventory(product, product.quantity - 1)
-                          }
-                          style={{
-                            padding: "6px 10px",
-                            borderRadius: 8,
-                            border: "1px solid #ccc",
-                            background: "white",
-                            cursor: "pointer"
-                          }}
-                        >
-                          -1
-                        </button>
-
-                        <button
-                          onClick={() =>
-                            updateInventory(product, product.quantity + 1)
-                          }
-                          style={{
-                            padding: "6px 10px",
-                            borderRadius: 8,
-                            border: "1px solid #ccc",
-                            background: "white",
-                            cursor: "pointer"
-                          }}
-                        >
-                          +1
-                        </button>
-                      </div>
-
-                      <div style={{ fontSize: 13, marginTop: 8 }}>
-                        Sizes: {product.sizes.join(", ")}
-                      </div>
-                    </div>
+                    )}
                   </div>
 
-                  <button
-                    onClick={() => deleteProduct(product.id)}
-                    style={{
-                      padding: "8px 12px",
-                      borderRadius: 8,
-                      border: "1px solid #b00020",
-                      background: "white",
-                      color: "#b00020",
-                      cursor: "pointer"
-                    }}
-                  >
-                    Delete
-                  </button>
+                  <div style={{display: "flex", gap: 8}}>
+                    {editingProduct && editingProduct.id === product.id ? (
+                      <>
+                        <button onClick={saveEdit} style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #111", background: "#111", color: "white", cursor: "pointer" }}>Save</button>
+                        <button onClick={() => setEditingProduct(null)} style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #ccc", background: "white", cursor: "pointer" }}>Cancel</button>
+                      </>
+                    ) : (
+                      <button onClick={() => setEditingProduct(product)} style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #111", background: "white", cursor: "pointer" }}>Edit</button>
+                    )}
+                    <button
+                      onClick={() => deleteProduct(product.id)}
+                      style={{
+                        padding: "8px 12px",
+                        borderRadius: 8,
+                        border: "1px solid #b00020",
+                        background: "white",
+                        color: "#b00020",
+                        cursor: "pointer"
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
