@@ -37,9 +37,6 @@ ensureFile(usersPath, []);
 ensureFile(ordersPath, []);
 ensureFile(productsPath, []);
 
-// Payment attempt counter for dummy rejection algorithm
-let paymentAttempts = 0;
-
 /* -------------------------
    Auth Routes
 -------------------------- */
@@ -352,14 +349,7 @@ app.post("/api/checkout", (req, res) => {
     });
   }
 
-  // Dummy payment rejection algorithm: deny every 3rd request
-  paymentAttempts++;
-  if (paymentAttempts % 3 === 0) {
-    return res.status(400).json({
-      success: false,
-      message: "Credit Card Authorization Failed."
-    });
-  }
+ 
 
   for (const item of items) {
     const product = products.find((p) => p.id === item.id);
