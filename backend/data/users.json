@@ -34,5 +34,17 @@
     "postalCode": "M1C 4GV",
     "cardLast4": "3664",
     "createdAt": "2026-04-03T19:00:44.871Z"
+  },
+  {
+    "id": 4,
+    "fullName": "Maya Bennett",
+    "email": "maya.bennett@icloud.com",
+    "password": "york123",
+    "role": "customer",
+    "address": "142 Maple Grove Lane",
+    "city": "Ottawa",
+    "postalCode": "K2P 1L4",
+    "cardLast4": "9999",
+    "createdAt": "2026-04-07T02:39:31.491Z"
   }
 ]

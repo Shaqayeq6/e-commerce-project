@@ -60,5 +60,103 @@
       "nameOnCard": "Ealara"
     },
     "createdAt": "2026-04-03T19:04:23.033Z"
+  },
+  {
+    "orderId": 543140,
+    "customer": {
+      "fullName": "Maya Bennett",
+      "email": "maya.bennett@icloud.com",
+      "address": "142 Maple Grove Lane",
+      "city": "Ottawa",
+      "postalCode": "K2P 1L4"
+    },
+    "items": [
+      {
+        "id": 2,
+        "name": "Urban Street Sneaker",
+        "brand": "Adidas",
+        "category": "Women",
+        "type": "Casual",
+        "price": 109.99,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77",
+        "selectedSize": "6",
+        "key": "2-6",
+        "quantity": 1
+      }
+    ],
+    "total": 109.99,
+    "paymentMethod": {
+      "last4": "5555",
+      "nameOnCard": "Maya Bennett"
+    },
+    "createdAt": "2026-04-07T02:40:14.772Z"
+  },
+  {
+    "orderId": 224230,
+    "customer": {
+      "fullName": "Maya Bennett",
+      "email": "maya.bennett@icloud.com",
+      "address": "142 Maple Grove Lane",
+      "city": "Ottawa",
+      "postalCode": "K2P 1L4"
+    },
+    "items": [
+      {
+        "id": 1,
+        "name": "AirFlex Runner",
+        "brand": "Nike",
+        "category": "Men",
+        "type": "Running",
+        "price": 129.99,
+        "quantity": 1,
+        "sizes": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format",
+        "description": "Lightweight running shoe built for everyday comfort and performance.",
+        "selectedSize": "7",
+        "key": "1-7",
+        "stock": 4
+      },
+      {
+        "id": 7,
+        "name": "Slouch Boots",
+        "brand": "Fendi",
+        "category": "Women",
+        "type": "Boots",
+        "price": 220.99,
+        "quantity": 1,
+        "sizes": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "image": "https://images.unsplash.com/photo-1763661300203-aa3e2702f510?w=600&q=80&auto=format",
+        "description": "Luxury slouch boots with premium materials and standout design.",
+        "selectedSize": "7",
+        "key": "7-7",
+        "stock": 1
+      }
+    ],
+    "total": 350.98,
+    "paymentMethod": {
+      "last4": "9999",
+      "nameOnCard": "Maya B"
+    },
+    "createdAt": "2026-04-07T06:11:24.782Z"
   }
 ]
