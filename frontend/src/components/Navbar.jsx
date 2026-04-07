@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
+import { WishlistContext } from "../context/WishlistContext";
 
 export default function Navbar() {
   const { totalItems } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
+  const { wishlistCount } = useContext(WishlistContext);
 
   return (
     <nav
@@ -13,7 +15,7 @@ export default function Navbar() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "15px 30px",
+        padding: "16px 30px",
         background: "#111",
         color: "white"
       }}
@@ -25,7 +27,7 @@ export default function Navbar() {
         ShaqaWear
       </Link>
 
-      <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: "18px", alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
         {user && user.role === "admin" && (
           <>
             <Link
@@ -65,9 +67,16 @@ export default function Navbar() {
 
         <Link
           to="/orders"
-          style={{ color: "white", textDecoration: "none" }}
+          style={{ color: "white", textDecoration: "none", opacity: 0.92 }}
         >
           Orders
+        </Link>
+
+        <Link
+          to="/wishlist"
+          style={{ color: "white", textDecoration: "none", opacity: 0.92 }}
+        >
+          Wishlist ({wishlistCount})
         </Link>
 
         {user ? (
@@ -100,7 +109,7 @@ export default function Navbar() {
         ) : (
           <Link
             to="/login"
-            style={{ color: "white", textDecoration: "none" }}
+            style={{ color: "white", textDecoration: "none", opacity: 0.92 }}
           >
             Login / Register
           </Link>
@@ -108,7 +117,7 @@ export default function Navbar() {
 
         <Link
           to="/cart"
-          style={{ color: "white", textDecoration: "none" }}
+          style={{ color: "white", textDecoration: "none", opacity: 0.92 }}
         >
           🛒 Cart ({totalItems})
         </Link>

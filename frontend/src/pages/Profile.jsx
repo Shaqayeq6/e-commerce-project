@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { WishlistContext } from "../context/WishlistContext";
 
 export default function Profile() {
   const { user, logout } = useContext(AuthContext);
+  const { wishlistCount } = useContext(WishlistContext);
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -77,6 +79,10 @@ export default function Profile() {
         <p><strong>Postal Code:</strong> {user.postalCode || "-"}</p>
         <p><strong>Saved Card:</strong> {user.cardLast4 ? `**** **** **** ${user.cardLast4}` : "-"}</p>
         <p><strong>Member Since:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
+        <p>
+          <strong>Wishlist Items:</strong> {wishlistCount}{" "}
+          <Link to="/wishlist">View Wishlist</Link>
+        </p>
       </div>
 
       <h2>My Orders</h2>
