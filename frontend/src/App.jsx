@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import Customers from "./pages/Customers";
 import Admin from "./pages/Admin";
 import Wishlist from "./pages/Wishlist";
+import Chatbot from "./components/Chatbot";
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/customers" element={<Customers />} />
       </Routes>
+      <Chatbot />
     </BrowserRouter>
   );
 }

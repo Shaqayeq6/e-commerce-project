@@ -1,3 +1,4 @@
+const fetch = require("node-fetch");
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
@@ -14,6 +15,8 @@ const dataDir = path.join(__dirname, "data");
 const usersPath = path.join(dataDir, "users.json");
 const ordersPath = path.join(dataDir, "orders.json");
 const productsPath = path.join(dataDir, "products.json");
+
+
 
 function ensureFile(filePath, defaultData) {
   if (!fs.existsSync(filePath)) {
@@ -424,6 +427,165 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "Backend is running!" });
 });
 
+
+/* -------------------------
+   Chatbot
+-------------------------- */
+
+//function for more dynamic chat responses
+//helps to categorize based on user keywords
+function parseIntent(message) {
+  const msg = message.toLowerCase().replace(/['’]/g, "");
+
+  return {
+    category: detectCategory(msg),
+    types: detectTypes(msg),
+    priceLimit: extractPriceLimit(msg),
+    raw: msg
+  };
+}
+
+//check for keywords in message
+function detectCategory(msg) {
+  if (msg.includes("women") || msg.includes("womens")) return "Women";
+  if (msg.includes("men") || msg.includes("mens")) return "Men";
+  if (msg.includes("kids") || msg.includes("child")) return "Kids";
+  return null;
+}
+
+//filtering based on message
+function detectTypes(msg) {
+  const types = [];
+
+  if (
+    msg.includes("shoe") ||
+    msg.includes("shoes") ||
+    msg.includes("footwear")
+  ) {
+    types.push("ANY_SHOE");
+  }
+
+  if (msg.includes("boot")) types.push("Boots");
+  if (msg.includes("sneaker")) types.push("Sneaker");
+  if (msg.includes("running")) types.push("Running");
+  if (msg.includes("sport")) types.push("Sport");
+
+  return types;
+}
+
+//for people asking about price 
+//get the price they mention not wanting to go over
+//helps determine price range
+function extractPriceLimit(msg) {
+  const match = msg.match(/\$?(\d+)/);
+  if (msg.includes("under") || msg.includes("below")) {
+    return match ? parseInt(match[1]) : null;
+  }
+  return null;
+}
+
+//recommends products based on keywords in the message
+function recommendProducts(products, intent) {
+  let results = [...products];
+
+  //filter by the category
+  if (intent.category) {
+    results = results.filter(p => p.category === intent.category);
+  }
+
+  //type filter
+  const shoeTypes = ["Boots", "Sneaker", "Running", "Sport"];
+
+  if (intent.types.includes("Boots")) {
+    results = results.filter(p => p.type === "Boots");
+
+  } else if (intent.types.includes("Sneaker")) {
+    results = results.filter(p => p.type === "Sneaker");
+
+  } else if (intent.types.includes("Running")) {
+    results = results.filter(p => p.type === "Running");
+
+  } else if (intent.types.includes("Sport")) {
+    results = results.filter(p => p.type === "Sport");
+
+  } else if (intent.types.includes("ANY_SHOE")) {
+    results = results.filter(p => shoeTypes.includes(p.type));
+  }
+
+  //max price filter
+  if (intent.priceLimit) {
+    results = results.filter(p => p.price <= intent.priceLimit);
+  }
+
+  // fallback
+  if (results.length === 0) return [];
+
+  // randomize results so they get new recommendations
+  results.sort(() => Math.random() - 0.5);
+
+  return results.slice(0, 3);
+}
+
+
+
+app.post("/api/chat", (req, res) => {
+  const { message } = req.body;
+  const products = readData(productsPath);
+
+  const intent = parseIntent(message);
+  const results = recommendProducts(products, intent);
+
+  //note that shipping and order responses are basic since these 
+  //features are created for demonstration purposes
+
+  // simple shipping response
+  if (message.toLowerCase().includes("shipping") || message.toLowerCase().includes("ship") || message.toLowerCase().includes("time")) {
+    return res.json({
+      success: true,
+      reply:
+        "Shipping usually takes 2-3 weeks depending on your location."
+    });
+  }
+
+  // simple order response
+  if (message.toLowerCase().includes("order")) {
+    return res.json({
+      success: true,
+      reply:
+        "You can view your orders in the Orders page after logging in."
+    });
+  }
+
+  //no matching products response
+  if (!results || results.length === 0) {
+    return res.json({
+      success: true,
+      reply: {
+        type: "text",
+        message:
+          "Sorry, we couldn't find anything matching your request. Please try searching for another product."
+      }
+    });
+  }
+
+  // product response
+  return res.json({
+    success: true,
+    reply: {
+      type: "products",
+      items: results.map(p => ({
+        id: p.id,
+        name: p.name,
+        price: p.price,
+        image: p.image,
+        description: p.description
+      }))
+    }
+  });
+});
+
+
+
 /* -------------------------
    Fallback
 -------------------------- */
@@ -442,3 +604,5 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
