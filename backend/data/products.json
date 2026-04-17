@@ -6,7 +6,7 @@
     "category": "Men",
     "type": "Running",
     "price": 129.99,
-    "quantity": 10,
+    "quantity": 9,
     "sizes": [
       7,
       8,
@@ -62,7 +62,7 @@
     "category": "Women",
     "type": "Sneaker",
     "price": 99.99,
-    "quantity": 12,
+    "quantity": 11,
     "sizes": [
       6,
       7,
@@ -98,7 +98,7 @@
     "category": "Women",
     "type": "Sneaker",
     "price": 79.99,
-    "quantity": 6,
+    "quantity": 5,
     "sizes": [
       6,
       7,
