@@ -192,7 +192,8 @@ export default function Checkout() {
       navigate("/confirmation", {
         state: {
           orderId: data.orderId, customer: form, total: totalPrice, items: [...cart],
-          last4: payment.cardNumber.replace(/\s/g, "").slice(-4)
+          last4: payment.cardNumber.replace(/\s/g, "").slice(-4),
+          confirmationEmail: data.confirmationEmail
         }
       });
     } catch (err) {
