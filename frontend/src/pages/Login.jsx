@@ -79,8 +79,9 @@ export default function Login() {
         </button>
       </form>
 
-      <div style={{ marginTop: 24 }}>
-        Don't have an account? <Link to="/register" style={{ color: "#111", fontWeight: "bold" }}>Sign Up</Link>
+      <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 8 }}>
+        <div><Link to="/forgot-password" style={{ color: "#111", fontSize: "0.9rem" }}>Forgot your password?</Link></div>
+        <div>Don't have an account? <Link to="/register" style={{ color: "#111", fontWeight: "bold" }}>Sign Up</Link></div>
       </div>
     </div>
   );

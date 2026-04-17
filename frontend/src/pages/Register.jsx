@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Register() {
   const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,7 +19,7 @@ export default function Register() {
       const res = await fetch("http://localhost:5001/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullName, email, password })
+        body: JSON.stringify({ fullName, username, email, password })
       });
 
       const data = await res.json();
@@ -52,6 +53,14 @@ export default function Register() {
           placeholder="Full Name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
+          required
+          style={{ padding: 12, borderRadius: 8, border: "1px solid #ccc" }}
+        />
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
           style={{ padding: 12, borderRadius: 8, border: "1px solid #ccc" }}
         />

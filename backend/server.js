@@ -47,7 +47,7 @@ ensureFile(productsPath, []);
 // Register
 app.post("/api/auth/register", (req, res) => {
   const users = readData(usersPath);
-  const { fullName, email, password } = req.body;
+  const { fullName, username, email, password } = req.body;
 
   if (!fullName || !email || !password) {
     return res.status(400).json({
@@ -57,7 +57,7 @@ app.post("/api/auth/register", (req, res) => {
   }
 
   const existingUser = users.find(
-    (u) => u.email.toLowerCase() === email.toLowerCase()
+    (u) => u.email.toLowerCase() === email.toLowerCase() && u.username && u.username.toLowerCase() === username.toLowerCase()
   );
 
   if (existingUser) {
@@ -70,6 +70,7 @@ app.post("/api/auth/register", (req, res) => {
   const newUser = {
     id: users.length ? Math.max(...users.map((u) => u.id)) + 1 : 1,
     fullName,
+    username,
     email,
     password,
     role: "customer",
@@ -124,6 +125,42 @@ app.post("/api/auth/login", (req, res) => {
   });
 });
 
+// Reset password (direct mock mode)
+app.post('/api/auth/reset-password', (req, res) => {
+  const users = readData(usersPath);
+  const { email, username, newPassword } = req.body;
+
+  if (!email || !username || !newPassword) {
+    return res.status(400).json({
+      success: false,
+      message: 'Email, username, and new password required'
+    });
+  }
+
+  const userIndex = users.findIndex(
+    (u) => 
+      u.email.toLowerCase() === email.toLowerCase() && 
+      u.username && u.username.toLowerCase() === username.toLowerCase()
+  );
+
+  // Still return generic success for security if email not found
+  if (userIndex === -1) {
+    return res.status(200).json({
+      success: true,
+      message: 'If that email exists, the password was reset.'
+    });
+  }
+
+  users[userIndex].password = newPassword;
+  writeData(usersPath, users);
+
+  res.status(200).json({
+    success: true,
+    message: 'Password successfully updated'
+  });
+});
+
+
 /* -------------------------
    Users
 -------------------------- */
@@ -142,6 +179,7 @@ app.put("/api/users/:id", (req, res) => {
 
   const {
     fullName,
+    username,
     email,
     role,
     address = "",
@@ -180,6 +218,7 @@ app.put("/api/users/:id", (req, res) => {
   users[userIndex] = {
     ...users[userIndex],
     fullName,
+    username,
     email,
     role,
     address,
@@ -435,7 +474,7 @@ app.get("/api/health", (req, res) => {
 //function for more dynamic chat responses
 //helps to categorize based on user keywords
 function parseIntent(message) {
-  const msg = message.toLowerCase().replace(/['’]/g, "");
+  const msg = message.toLowerCase().replace(/['ï¿½]/g, "");
 
   return {
     category: detectCategory(msg),
