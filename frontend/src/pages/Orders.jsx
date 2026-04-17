@@ -9,16 +9,22 @@ export default function Orders() {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    if (!user) {
+      setOrders([]);
+      setLoading(false);
+      return;
+    }
+
+    if (user.role === "admin") {
+      setOrders([]);
+      setLoading(false);
+      return;
+    }
+
     fetch("http://localhost:5001/api/orders")
       .then((res) => res.json())
       .then((data) => {
-        if (user && user.role === "admin") {
-          setOrders(data);
-        } else if (user) {
-          setOrders(data.filter((o) => o.customer.email === user.email));
-        } else {
-          setOrders([]);
-        }
+        setOrders(data.filter((o) => o.customer.email === user.email));
         setLoading(false);
       })
       .catch((err) => {
@@ -39,6 +45,18 @@ export default function Orders() {
     );
   }
 
+  if (user.role === "admin") {
+    return (
+      <div style={{ padding: 20, maxWidth: 1000, margin: "0 auto" }}>
+        <div style={{ marginBottom: 16 }}>
+          <Link to="/">⬅ Back to Store</Link>
+        </div>
+        <h1 style={{ marginBottom: 20 }}>Orders</h1>
+        <p>Admins should use the Sales History page instead.</p>
+      </div>
+    );
+  }
+
   return (
     <div style={{ padding: 20, maxWidth: 1000, margin: "0 auto" }}>
       <h1 style={{ marginBottom: 20 }}>Orders</h1>
@@ -52,28 +70,8 @@ export default function Orders() {
       ) : orders.length === 0 ? (
         <p>No orders found yet.</p>
       ) : (
-        <>
-          {user && user.role === "admin" && (
-            <div style={{ padding: 20, background: "#f8f9fa", borderRadius: 12, marginBottom: 20, border: "1px solid #ddd" }}>
-              <h2 style={{margin: "0 0 16px 0"}}>📊 Sales Summary</h2>
-              <div style={{ display: "flex", gap: 32 }}>
-                <div>
-                  <div style={{ fontSize: 13, color: "#666", textTransform: "uppercase", fontWeight: "bold" }}>Total Revenue</div>
-                  <div style={{ fontSize: 24, fontWeight: "bold" }}>${orders.reduce((sum, o) => sum + Number(o.total), 0).toFixed(2)}</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 13, color: "#666", textTransform: "uppercase", fontWeight: "bold" }}>Total Orders</div>
-                  <div style={{ fontSize: 24, fontWeight: "bold" }}>{orders.length}</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 13, color: "#666", textTransform: "uppercase", fontWeight: "bold" }}>Avg Order Value</div>
-                  <div style={{ fontSize: 24, fontWeight: "bold" }}>${(orders.reduce((sum, o) => sum + Number(o.total), 0) / orders.length).toFixed(2)}</div>
-                </div>
-              </div>
-            </div>
-          )}
-          <div style={{ display: "grid", gap: 16 }}>
-            {orders
+        <div style={{ display: "grid", gap: 16 }}>
+          {orders
             .slice()
             .reverse()
             .map((order) => (
@@ -136,7 +134,6 @@ export default function Orders() {
               </div>
             ))}
         </div>
-        </>
       )}
     </div>
   );
