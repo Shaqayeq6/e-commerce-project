@@ -61,14 +61,19 @@
   },
   {
     "id": 6,
-    "fullName": "testuser 1",
-    "email": "testuser1@gmail.com",
+    "fullName": "alexa l",
+    "email": "alexa.lupo5@gmail.com",
     "password": "testuser",
     "role": "customer",
-    "address": "jhsduasi",
-    "city": "slakhli",
-    "postalCode": "668958",
-    "cardLast4": "2233",
-    "createdAt": "2026-04-12T01:28:47.899Z"
+    "address": "123 mystreet ",
+    "city": "vaughan",
+    "postalCode": "AHA J3J",
+    "cardLast4": "3333",
+    "createdAt": "2026-04-12T01:28:47.899Z",
+    "phone": "1234567890",
+    "cardNumber": "",
+    "nameOnCard": "",
+    "expiry": "",
+    "cvv": ""
   }
 ]

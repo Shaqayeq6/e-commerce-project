@@ -1,3 +1,5 @@
+let checkoutAttemptCount = 0;
+
 class CheckoutService {
   constructor({ orderDao, productDao, userDao, emailService }) {
     this.orderDao = orderDao;
@@ -7,8 +9,28 @@ class CheckoutService {
   }
 
   async checkout({ customer, items, total, paymentMethod }) {
+    // Fail every 3rd payment
+    checkoutAttemptCount++;
+
+    if (checkoutAttemptCount % 3 === 0) {
+      return {
+        status: 400,
+        body: {
+          success: false,
+          message: "Credit Card Authorization Failed."
+        }
+      };
+    }
+
+    // Validate request
     if (!customer || !items || !Array.isArray(items) || items.length === 0 || !total) {
-      return { status: 400, body: { success: false, message: "Missing order information" } };
+      return {
+        status: 400,
+        body: {
+          success: false,
+          message: "Missing order information"
+        }
+      };
     }
 
     if (
@@ -20,10 +42,14 @@ class CheckoutService {
     ) {
       return {
         status: 400,
-        body: { success: false, message: "Customer information is incomplete" }
+        body: {
+          success: false,
+          message: "Customer information is incomplete"
+        }
       };
     }
 
+    // Check product availability
     const products = await this.productDao.getAll();
 
     for (const item of items) {
@@ -40,14 +66,17 @@ class CheckoutService {
       }
     }
 
+    // Update inventory
     for (const item of items) {
       const product = products.find((entry) => entry.id === item.id);
+
       await this.productDao.updateById(item.id, {
         ...product,
         quantity: product.quantity - item.quantity
       });
     }
 
+    // Update user info if exists
     const existingUser = await this.userDao.getByEmail(customer.email);
 
     if (existingUser) {
@@ -63,6 +92,7 @@ class CheckoutService {
       });
     }
 
+    // Create order
     const order = {
       orderId: Math.floor(Math.random() * 1000000),
       customer,
@@ -72,8 +102,12 @@ class CheckoutService {
       createdAt: new Date().toISOString()
     };
 
-    const confirmationEmail = await this.emailService.sendOrderConfirmationEmail(order);
+    // Send confirmation email
+    const confirmationEmail =
+      await this.emailService.sendOrderConfirmationEmail(order);
+
     order.confirmationEmail = confirmationEmail;
+
     await this.orderDao.create(order);
 
     return {

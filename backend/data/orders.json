@@ -17,7 +17,14 @@
         "type": "Sneaker",
         "price": 109.99,
         "quantity": 1,
-        "sizes": [6,7,8,9,10,11],
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
         "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format",
         "description": "Classic Vans silhouette with a timeless streetwear vibe.",
         "selectedSize": "8",
@@ -32,7 +39,14 @@
         "type": "Sneaker",
         "price": 79.99,
         "quantity": 1,
-        "sizes": [6,7,8,9,10,11],
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
         "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80&auto=format",
         "description": "Iconic Air Force style with a bold modern twist.",
         "selectedSize": "6",
@@ -47,7 +61,6 @@
     },
     "createdAt": "2026-04-03T19:04:23.033Z"
   },
-
   {
     "orderId": 922188,
     "customer": {
@@ -75,7 +88,6 @@
     },
     "createdAt": "2026-04-07T19:08:03.150Z"
   },
-
   {
     "orderId": 543140,
     "customer": {
@@ -94,7 +106,14 @@
         "type": "Casual",
         "price": 109.99,
         "quantity": 1,
-        "sizes": [6,7,8,9,10,11],
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
         "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
         "description": "Clean and versatile sneaker perfect for everyday outfits.",
         "selectedSize": "8",
@@ -109,7 +128,14 @@
         "type": "Sneaker",
         "price": 79.99,
         "quantity": 1,
-        "sizes": [6,7,8,9,10,11],
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
         "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80&auto=format",
         "description": "Iconic Air Force style with a bold modern twist.",
         "selectedSize": "8",
@@ -124,7 +150,6 @@
     },
     "createdAt": "2026-04-07T02:40:14.772Z"
   },
-
   {
     "orderId": 224230,
     "customer": {
@@ -143,7 +168,14 @@
         "type": "Running",
         "price": 129.99,
         "quantity": 1,
-        "sizes": [7,8,9,10,11,12],
+        "sizes": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
         "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format",
         "description": "Lightweight running shoe built for everyday comfort and performance.",
         "selectedSize": "7",
@@ -158,7 +190,12 @@
         "type": "Boots",
         "price": 220.99,
         "quantity": 1,
-        "sizes": [7,8,9,10],
+        "sizes": [
+          7,
+          8,
+          9,
+          10
+        ],
         "image": "https://images.unsplash.com/photo-1763661300203-aa3e2702f510?w=600&q=80&auto=format",
         "description": "Luxury slouch boots with premium materials and standout design.",
         "selectedSize": "7",
@@ -173,7 +210,6 @@
     },
     "createdAt": "2026-04-07T06:11:24.782Z"
   },
-
   {
     "orderId": 88199,
     "customer": {
@@ -193,7 +229,14 @@
         "type": "Sneaker",
         "price": 109.99,
         "quantity": 1,
-        "sizes": [6,7,8,9,10,11],
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
         "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format",
         "description": "Classic Vans silhouette with a timeless streetwear vibe.",
         "selectedSize": "6",
@@ -208,7 +251,14 @@
         "type": "Running",
         "price": 129.99,
         "quantity": 1,
-        "sizes": [7,8,9,10,11,12],
+        "sizes": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
         "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format",
         "description": "Lightweight running shoe built for everyday comfort and performance.",
         "selectedSize": "7",
@@ -222,5 +272,691 @@
       "nameOnCard": "testuser 1"
     },
     "createdAt": "2026-04-12T01:33:28.577Z"
+  },
+  {
+    "orderId": 626632,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "1234 jhkgk",
+      "city": "hjviug",
+      "postalCode": "vhvvbjkb"
+    },
+    "items": [
+      {
+        "id": 16,
+        "name": "Pink Classic Clog",
+        "brand": "Crocs",
+        "category": "Kids",
+        "type": "Sport",
+        "price": 49.99,
+        "quantity": 1,
+        "sizes": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "image": "https://images.pexels.com/photos/8801123/pexels-photo-8801123.jpeg?w=600&q=80&auto=format",
+        "description": "Bring pink Crocs with an extra starry cute touch.",
+        "selectedSize": "4",
+        "key": "16-4",
+        "stock": 8
+      }
+    ],
+    "total": 49.99,
+    "paymentMethod": {
+      "last4": "0000",
+      "nameOnCard": "alexa l"
+    },
+    "createdAt": "2026-04-18T04:04:07.356Z"
+  },
+  {
+    "orderId": 479480,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "bk;'nq knqcbj",
+      "city": "bjqeoi",
+      "postalCode": "bevioeq"
+    },
+    "items": [
+      {
+        "id": 2,
+        "name": "Old Skool Shoe",
+        "brand": "Vans",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 109.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format",
+        "description": "Classic Vans silhouette with a timeless streetwear vibe.",
+        "selectedSize": "6",
+        "key": "2-6",
+        "stock": 5
+      }
+    ],
+    "total": 109.99,
+    "paymentMethod": {
+      "last4": "6115",
+      "nameOnCard": "alexa l"
+    },
+    "createdAt": "2026-04-18T04:04:55.088Z"
+  },
+  {
+    "orderId": 347485,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "bcgwo hvioe",
+      "city": "vnionoinv",
+      "postalCode": "vihdpf"
+    },
+    "items": [
+      {
+        "id": 2,
+        "name": "Old Skool Shoe",
+        "brand": "Vans",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 109.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format",
+        "description": "Classic Vans silhouette with a timeless streetwear vibe.",
+        "selectedSize": "6",
+        "key": "2-6",
+        "stock": 4
+      }
+    ],
+    "total": 109.99,
+    "paymentMethod": {
+      "last4": "0000",
+      "nameOnCard": "bvqoqn"
+    },
+    "createdAt": "2026-04-18T04:05:27.006Z"
+  },
+  {
+    "orderId": 50475,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567897",
+      "address": "hjvuidbckl kjn",
+      "city": "jdbvin'm as",
+      "postalCode": "m vjdbcqnml m"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "6",
+        "key": "4-6",
+        "stock": 12
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "0000",
+      "nameOnCard": "bjdlk"
+    },
+    "createdAt": "2026-04-18T04:06:02.612Z"
+  },
+  {
+    "orderId": 563734,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 3,
+        "name": "Air Max 1 Ultra",
+        "brand": "Nike",
+        "category": "Men",
+        "type": "Running",
+        "price": 149.99,
+        "quantity": 1,
+        "sizes": [
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&q=80&auto=format",
+        "description": "Responsive cushioning and sleek design for daily wear.",
+        "selectedSize": "8",
+        "key": "3-8",
+        "stock": 5
+      }
+    ],
+    "total": 149.99,
+    "paymentMethod": {
+      "last4": "6559",
+      "nameOnCard": "alexal"
+    },
+    "createdAt": "2026-04-18T04:10:12.173Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #563734",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 407606,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "6",
+        "key": "4-6",
+        "stock": 11
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "0000",
+      "nameOnCard": "vfgih"
+    },
+    "createdAt": "2026-04-18T04:13:11.841Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #407606",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 168499,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "6",
+        "key": "4-6",
+        "stock": 10
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "1111",
+      "nameOnCard": " viugihlknkb"
+    },
+    "createdAt": "2026-04-18T04:13:30.280Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #168499",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 915827,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "6",
+        "key": "4-6",
+        "stock": 9
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "1111",
+      "nameOnCard": "dxfcvjk"
+    },
+    "createdAt": "2026-04-18T04:13:49.178Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #915827",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 722629,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "6",
+        "key": "4-6",
+        "stock": 8
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "1111",
+      "nameOnCard": "zdxfcgvhb"
+    },
+    "createdAt": "2026-04-18T04:27:07.032Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #722629",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 303171,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 1,
+        "name": "AirFlex Runner",
+        "brand": "Nike",
+        "category": "Men",
+        "type": "Running",
+        "price": 129.99,
+        "quantity": 1,
+        "sizes": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format",
+        "description": "Lightweight running shoe built for everyday comfort and performance.",
+        "selectedSize": "7",
+        "key": "1-7",
+        "stock": 9
+      }
+    ],
+    "total": 129.99,
+    "paymentMethod": {
+      "last4": "4568",
+      "nameOnCard": "dxfcghvjb"
+    },
+    "createdAt": "2026-04-18T04:27:25.661Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #303171",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 993100,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 5,
+        "name": "KidsSprint",
+        "brand": "Puma",
+        "category": "Kids",
+        "type": "Sport",
+        "price": 49.99,
+        "quantity": 1,
+        "sizes": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "image": "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?w=600&q=80&auto=format",
+        "description": "Comfortable and durable sports shoes designed for active kids.",
+        "selectedSize": "1",
+        "key": "5-1",
+        "stock": 15
+      }
+    ],
+    "total": 49.99,
+    "paymentMethod": {
+      "last4": "3256",
+      "nameOnCard": "dfghjkl"
+    },
+    "createdAt": "2026-04-18T04:27:45.756Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #993100",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 394225,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 3,
+        "name": "Air Max 1 Ultra",
+        "brand": "Nike",
+        "category": "Men",
+        "type": "Running",
+        "price": 149.99,
+        "quantity": 1,
+        "sizes": [
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "image": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&q=80&auto=format",
+        "description": "Responsive cushioning and sleek design for daily wear.",
+        "selectedSize": "8",
+        "key": "3-8",
+        "stock": 4
+      }
+    ],
+    "total": 149.99,
+    "paymentMethod": {
+      "last4": "9325",
+      "nameOnCard": "dfghjk"
+    },
+    "createdAt": "2026-04-18T04:28:02.678Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #394225",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 552883,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "6",
+        "key": "4-6",
+        "stock": 7
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "1111",
+      "nameOnCard": "dxtfyguhk"
+    },
+    "createdAt": "2026-04-18T04:30:04.145Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #552883",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 915395,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "6",
+        "key": "4-6",
+        "stock": 6
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "3258",
+      "nameOnCard": "szdxfguh"
+    },
+    "createdAt": "2026-04-18T04:30:25.922Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #915395",
+      "sentAt": null,
+      "status": "not_configured"
+    }
+  },
+  {
+    "orderId": 781239,
+    "customer": {
+      "fullName": "alexa l",
+      "email": "alexa.lupo5@gmail.com",
+      "phone": "1234567890",
+      "address": "123 mystreet ",
+      "city": "vaughan",
+      "postalCode": "AHA J3J"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1,
+        "sizes": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "6",
+        "key": "4-6",
+        "stock": 5
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "3333",
+      "nameOnCard": "sdfghj"
+    },
+    "createdAt": "2026-04-18T04:30:47.156Z",
+    "confirmationEmail": {
+      "to": "alexa.lupo5@gmail.com",
+      "from": null,
+      "subject": "StepStyle Order Confirmation #781239",
+      "sentAt": null,
+      "status": "not_configured"
+    }
   }
 ]
