@@ -27,7 +27,15 @@ export default function Navbar() {
         ShaqaWear
       </Link>
 
-      <div style={{ display: "flex", gap: "18px", alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "18px",
+          alignItems: "center",
+          flexWrap: "wrap",
+          justifyContent: "flex-end"
+        }}
+      >
         {user && user.role === "admin" && (
           <>
             <Link
@@ -53,7 +61,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              to="/orders"
+              to="/admin/orders"
               style={{
                 color: "#ffeb3b",
                 textDecoration: "none",
@@ -65,12 +73,14 @@ export default function Navbar() {
           </>
         )}
 
-        <Link
-          to="/orders"
-          style={{ color: "white", textDecoration: "none", opacity: 0.92 }}
-        >
-          Orders
-        </Link>
+        {(!user || user.role !== "admin") && (
+          <Link
+            to="/orders"
+            style={{ color: "white", textDecoration: "none", opacity: 0.92 }}
+          >
+            Orders
+          </Link>
+        )}
 
         <Link
           to="/wishlist"

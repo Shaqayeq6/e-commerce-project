@@ -22,6 +22,7 @@ export default function Profile() {
 
     setForm({
       fullName: user.fullName || "",
+      username: user.username || "",
       email: user.email || "",
       phone: user.phone || "",
       address: user.address || "",
@@ -83,6 +84,8 @@ export default function Profile() {
               <div>
                 <label>Full Name</label>
                 <input value={form.fullName} onChange={(e) => setForm({ ...form, fullName: e.target.value })} style={inputStyle} />
+                <label>Username</label>
+                <input value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} style={inputStyle} />
                 <label>Email</label>
                 <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} style={inputStyle} />
                 <label>Phone Number</label>
@@ -112,6 +115,7 @@ export default function Profile() {
               Edit Profile
             </button>
             <p><strong>Name:</strong> {user.fullName}</p>
+            <p><strong>Username:</strong> {user.username || "Not provided"}</p>
             <p><strong>Email:</strong> {user.email}</p>
             <p><strong>Phone:</strong> {user.phone || "Not provided"}</p>
             <p><strong>Role:</strong> {user.role === "admin" ? "Admin" : "Customer"}</p>

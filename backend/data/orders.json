@@ -17,14 +17,7 @@
         "type": "Sneaker",
         "price": 109.99,
         "quantity": 1,
-        "sizes": [
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-        ],
+        "sizes": [6,7,8,9,10,11],
         "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format",
         "description": "Classic Vans silhouette with a timeless streetwear vibe.",
         "selectedSize": "8",
@@ -39,14 +32,7 @@
         "type": "Sneaker",
         "price": 79.99,
         "quantity": 1,
-        "sizes": [
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-        ],
+        "sizes": [6,7,8,9,10,11],
         "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80&auto=format",
         "description": "Iconic Air Force style with a bold modern twist.",
         "selectedSize": "6",
@@ -61,6 +47,35 @@
     },
     "createdAt": "2026-04-03T19:04:23.033Z"
   },
+
+  {
+    "orderId": 922188,
+    "customer": {
+      "fullName": "Arash",
+      "email": "Arash@gmail.com",
+      "address": "5 lenvalley st",
+      "city": "Toronto",
+      "postalCode": "M1C 4GV"
+    },
+    "items": [
+      {
+        "id": 4,
+        "name": "Jada Classic",
+        "brand": "Puma",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 99.99,
+        "quantity": 1
+      }
+    ],
+    "total": 99.99,
+    "paymentMethod": {
+      "last4": "0987",
+      "nameOnCard": "Arash"
+    },
+    "createdAt": "2026-04-07T19:08:03.150Z"
+  },
+
   {
     "orderId": 543140,
     "customer": {
@@ -78,27 +93,38 @@
         "category": "Women",
         "type": "Casual",
         "price": 109.99,
-        "sizes": [
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-        ],
-        "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77",
-        "selectedSize": "6",
-        "key": "2-6",
-        "quantity": 1
+        "quantity": 1,
+        "sizes": [6,7,8,9,10,11],
+        "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80&auto=format",
+        "description": "Clean and versatile sneaker perfect for everyday outfits.",
+        "selectedSize": "8",
+        "key": "4-8",
+        "stock": 12
+      },
+      {
+        "id": 6,
+        "name": "Air Force 1 Shadow",
+        "brand": "Nike",
+        "category": "Women",
+        "type": "Sneaker",
+        "price": 79.99,
+        "quantity": 1,
+        "sizes": [6,7,8,9,10,11],
+        "image": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80&auto=format",
+        "description": "Iconic Air Force style with a bold modern twist.",
+        "selectedSize": "8",
+        "key": "6-8",
+        "stock": 6
       }
     ],
-    "total": 109.99,
+    "total": 179.98,
     "paymentMethod": {
       "last4": "5555",
       "nameOnCard": "Maya Bennett"
     },
     "createdAt": "2026-04-07T02:40:14.772Z"
   },
+
   {
     "orderId": 224230,
     "customer": {
@@ -117,14 +143,7 @@
         "type": "Running",
         "price": 129.99,
         "quantity": 1,
-        "sizes": [
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
+        "sizes": [7,8,9,10,11,12],
         "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format",
         "description": "Lightweight running shoe built for everyday comfort and performance.",
         "selectedSize": "7",
@@ -139,12 +158,7 @@
         "type": "Boots",
         "price": 220.99,
         "quantity": 1,
-        "sizes": [
-          7,
-          8,
-          9,
-          10
-        ],
+        "sizes": [7,8,9,10],
         "image": "https://images.unsplash.com/photo-1763661300203-aa3e2702f510?w=600&q=80&auto=format",
         "description": "Luxury slouch boots with premium materials and standout design.",
         "selectedSize": "7",
@@ -159,6 +173,7 @@
     },
     "createdAt": "2026-04-07T06:11:24.782Z"
   },
+
   {
     "orderId": 88199,
     "customer": {
@@ -178,14 +193,7 @@
         "type": "Sneaker",
         "price": 109.99,
         "quantity": 1,
-        "sizes": [
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-        ],
+        "sizes": [6,7,8,9,10,11],
         "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&q=80&auto=format",
         "description": "Classic Vans silhouette with a timeless streetwear vibe.",
         "selectedSize": "6",
@@ -200,14 +208,7 @@
         "type": "Running",
         "price": 129.99,
         "quantity": 1,
-        "sizes": [
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
+        "sizes": [7,8,9,10,11,12],
         "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format",
         "description": "Lightweight running shoe built for everyday comfort and performance.",
         "selectedSize": "7",
@@ -215,7 +216,7 @@
         "stock": 10
       }
     ],
-    "total": 239.98000000000002,
+    "total": 239.98,
     "paymentMethod": {
       "last4": "2233",
       "nameOnCard": "testuser 1"

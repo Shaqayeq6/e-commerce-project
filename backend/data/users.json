@@ -37,6 +37,18 @@
   },
   {
     "id": 4,
+    "fullName": "Arash",
+    "email": "Arash@gmail.com",
+    "password": "123456",
+    "role": "customer",
+    "address": "5 lenvalley st",
+    "city": "Toronto",
+    "postalCode": "M1C 4GV",
+    "cardLast4": "0987",
+    "createdAt": "2026-04-07T19:07:00.838Z"
+  },
+  {
+    "id": 5,
     "fullName": "Maya Bennett",
     "email": "maya.bennett@icloud.com",
     "password": "york123",
@@ -48,7 +60,7 @@
     "createdAt": "2026-04-07T02:39:31.491Z"
   },
   {
-    "id": 5,
+    "id": 6,
     "fullName": "testuser 1",
     "email": "testuser1@gmail.com",
     "password": "testuser",
