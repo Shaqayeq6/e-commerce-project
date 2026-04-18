@@ -32,6 +32,15 @@ function writeData(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
+function buildOrderConfirmationEmail(order) {
+  return {
+    to: order.customer.email,
+    subject: `StepStyle Order Confirmation #${order.orderId}`,
+    sentAt: new Date().toISOString(),
+    status: "sent"
+  };
+}
+
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir);
 }
@@ -397,6 +406,9 @@ app.post("/api/checkout", (req, res) => {
     createdAt: new Date().toISOString()
   };
 
+  const confirmationEmail = buildOrderConfirmationEmail(newOrder);
+  newOrder.confirmationEmail = confirmationEmail;
+
   orders.push(newOrder);
 
   writeData(productsPath, products);
@@ -406,7 +418,8 @@ app.post("/api/checkout", (req, res) => {
   res.status(200).json({
     success: true,
     message: "Payment authorized",
-    orderId
+    orderId,
+    confirmationEmail
   });
 });
 
