@@ -20,6 +20,7 @@ async function seed() {
   const users = readJson("users");
   const products = readJson("products");
   const orders = readJson("orders");
+  const productsById = new Map(products.map((product) => [Number(product.id), product]));
 
   await pool.query("BEGIN");
 
@@ -96,6 +97,7 @@ async function seed() {
       );
 
       for (const item of order.items) {
+        const productFallback = productsById.get(Number(item.id)) || {};
         await pool.query(
           `INSERT INTO order_items (
             order_id, product_id, name, brand, category, type, price, quantity,
@@ -104,15 +106,15 @@ async function seed() {
           [
             order.orderId,
             item.id,
-            item.name,
-            item.brand,
-            item.category,
-            item.type,
-            Number(item.price),
+            item.name || productFallback.name || "",
+            item.brand || productFallback.brand || "",
+            item.category || productFallback.category || "",
+            item.type || productFallback.type || "",
+            Number(item.price ?? productFallback.price ?? 0),
             Number(item.quantity),
-            JSON.stringify(item.sizes || []),
-            item.image,
-            item.description || "",
+            JSON.stringify(item.sizes || productFallback.sizes || []),
+            item.image || productFallback.image || "",
+            item.description || productFallback.description || "",
             item.selectedSize || "",
             item.key || "",
             item.stock ?? null
