@@ -89,12 +89,12 @@ class AuthService {
     const user = await this.userDao.getByEmail(email);
 
     // Return generic success even if user not found (security best practice)
-    if (!user || !user.username || user.username.toLowerCase() !== username.toLowerCase()) {
+    if (!user || !user.fullName || user.fullName.toLowerCase() !== username.toLowerCase()) {
       return { status: 200, body: { success: true, message: "If that account exists, the password was reset." } };
     }
 
     user.password = newPassword;
-    await this.userDao.update(user.id, user);
+    await this.userDao.updateById(user.id, user);
 
     return {
       status: 200,
