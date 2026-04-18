@@ -21,5 +21,14 @@ module.exports = function createAuthRoutes(authService) {
     }
   });
 
+  router.post("/reset-password", async (req, res, next) => {
+    try {
+      const result = await authService.resetPassword(req.body);
+      res.status(result.status).json(result.body);
+    } catch (error) {
+      next(error);
+    }
+  });
+
   return router;
 };

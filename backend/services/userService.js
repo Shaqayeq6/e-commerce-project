@@ -29,6 +29,7 @@ class UserService {
     const cardNumber = payload.cardNumber || existing.cardNumber || "";
     const nextFields = {
       fullName: payload.fullName ?? existing.fullName,
+      username: payload.username ?? existing.username ?? "",
       email: payload.email ?? existing.email,
       password: payload.password ?? existing.password,
       role: payload.role ?? existing.role,
