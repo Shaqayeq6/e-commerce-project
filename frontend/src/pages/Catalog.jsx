@@ -321,16 +321,16 @@ function ProductCard({ product, isInWishlist, toggleWishlist }) {
       </button>
 
       <img
-        src={product.image}
-        alt={product.name}
-        style={{
-          width: "100%",
-          height: 220,
-          objectFit: "cover",
-          borderRadius: 14,
-          background: "#f3f3f3"
-        }}
-      />
+          src={product.image}
+          alt={product.name}
+          style={{
+            width: "100%",
+            height: 220,
+            objectFit: "cover",  
+            borderRadius: 14,
+            background: "#f3f3f3"
+          }}
+        />
 
       <div
         style={{
