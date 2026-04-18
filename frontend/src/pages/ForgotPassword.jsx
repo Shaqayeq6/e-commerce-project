@@ -4,7 +4,7 @@ import { apiUrl } from "../lib/api";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -18,7 +18,7 @@ export default function ForgotPassword() {
       const res = await fetch(apiUrl("/api/auth/reset-password"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, username, newPassword })
+        body: JSON.stringify({ email, fullName, newPassword })
       });
 
       const data = await res.json();
@@ -56,7 +56,7 @@ export default function ForgotPassword() {
   return (
     <div style={{ padding: 40, maxWidth: 400, margin: "0 auto", textAlign: "center" }}>
       <h2>Reset Password</h2>
-      <p style={{ opacity: 0.7, marginBottom: 24 }}>Enter your email, username (full name), and new desired password.</p>
+      <p style={{ opacity: 0.7, marginBottom: 24 }}>Enter your email, full name, and new desired password.</p>
 
       {error && (
         <div style={{ padding: 12, marginBottom: 16, background: "#ffebee", color: "#c62828", borderRadius: 8 }}>
@@ -75,9 +75,9 @@ export default function ForgotPassword() {
         />
         <input
           type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
           required
           style={{ padding: 12, borderRadius: 8, border: "1px solid #ccc" }}
         />

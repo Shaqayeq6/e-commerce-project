@@ -81,15 +81,20 @@ class AuthService {
       }
     };
   }
-  async resetPassword({ email, username, newPassword }) {
-    if (!email || !username || !newPassword) {
-      return { status: 400, body: { success: false, message: "Email, username, and new password are required" } };
+  async resetPassword({ email, username, fullName, newPassword }) {
+    const identity = (fullName || username || "").trim();
+
+    if (!email || !identity || !newPassword) {
+      return {
+        status: 400,
+        body: { success: false, message: "Email, full name, and new password are required" }
+      };
     }
 
     const user = await this.userDao.getByEmail(email);
 
     // Return generic success even if user not found (security best practice)
-    if (!user || !user.fullName || user.fullName.toLowerCase() !== username.toLowerCase()) {
+    if (!user || !user.fullName || user.fullName.toLowerCase() !== identity.toLowerCase()) {
       return { status: 200, body: { success: true, message: "If that account exists, the password was reset." } };
     }
 
