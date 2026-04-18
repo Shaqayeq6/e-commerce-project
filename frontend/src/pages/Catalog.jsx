@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { WishlistContext } from "../context/WishlistContext";
 import { RecentlyViewedContext } from "../context/RecentlyViewedContext";
 
+import { apiUrl } from "../lib/api";
 export default function Catalog() {
   const { isInWishlist, toggleWishlist } = useContext(WishlistContext);
   const { recentlyViewed } = useContext(RecentlyViewedContext);
@@ -20,7 +21,7 @@ export default function Catalog() {
         setLoading(true);
         setError("");
 
-        const res = await fetch("http://localhost:5001/api/products");
+        const res = await fetch(apiUrl("/api/products"));
 
         if (!res.ok) {
           throw new Error("Failed to fetch products");

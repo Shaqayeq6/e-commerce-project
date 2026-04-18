@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaCommentDots } from "react-icons/fa";
 
+import { apiUrl } from "../lib/api";
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -19,7 +20,7 @@ export default function Chatbot() {
     setMessages((prev) => [...prev, userMsg]);
 
     try {
-      const res = await fetch("http://localhost:5001/api/chat", {
+      const res = await fetch(apiUrl("/api/chat"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input })

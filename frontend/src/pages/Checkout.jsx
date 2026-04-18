@@ -2,6 +2,7 @@ import { useContext, useMemo, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { apiUrl } from "../lib/api";
 
 const inputStyle = {
   width: "100%",
@@ -95,7 +96,7 @@ export default function Checkout() {
     e.preventDefault();
     setAuthError("");
     try {
-      const res = await fetch("http://localhost:5001/api/auth/login", {
+      const res = await fetch(apiUrl("/api/auth/login"), {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify(authForm)
       });
@@ -121,7 +122,7 @@ export default function Checkout() {
         return;
       }
       try {
-        const res = await fetch("http://localhost:5001/api/auth/register", {
+        const res = await fetch(apiUrl("/api/auth/register"), {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             fullName: form.fullName, email: form.email, password: authForm.password, phone: form.phone,
@@ -145,7 +146,7 @@ export default function Checkout() {
       const isFirstTime = !user.address && !user.cardNumber;
       if (!useSavedInfo || isFirstTime) {
         try {
-          const res = await fetch(`http://localhost:5001/api/users/${user.id}`, {
+          const res = await fetch(apiUrl(`/api/users/${user.id}`), {
              method: "PUT", headers: {"Content-Type": "application/json"},
              body: JSON.stringify({
                 phone: form.phone, address: form.address, city: form.city, postalCode: form.postalCode,
@@ -174,7 +175,7 @@ export default function Checkout() {
     };
 
     try {
-      const res = await fetch("http://localhost:5001/api/checkout", {
+      const res = await fetch(apiUrl("/api/checkout"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderPayload)
