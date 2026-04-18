@@ -5,6 +5,7 @@ import { WishlistContext } from "../context/WishlistContext";
 import { RecentlyViewedContext } from "../context/RecentlyViewedContext";
 import { AuthContext } from "../context/AuthContext";
 
+import { apiUrl } from "../lib/api";
 export default function ProductDetails() {
   const { id } = useParams();
   const { addToCart, cart } = useContext(CartContext);
@@ -27,7 +28,7 @@ export default function ProductDetails() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    fetch(`http://localhost:5001/api/products/${id}`)
+    fetch(apiUrl(`/api/products/${id}`))
       .then((res) => {
         if (!res.ok) throw new Error("Product not found");
         return res.json();
@@ -47,7 +48,7 @@ export default function ProductDetails() {
   }, [id, trackRecentlyViewed]);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/products")
+    fetch(apiUrl("/api/products"))
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch products");

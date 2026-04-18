@@ -5,6 +5,7 @@ import { WishlistContext } from "../context/WishlistContext";
 
 const inputStyle = { width: "100%", padding: 8, margin: "4px 0 12px", borderRadius: 6, border: "1px solid #ccc", boxSizing: "border-box" };
 
+import { apiUrl } from "../lib/api";
 export default function Profile() {
   const { user, logout, updateUser } = useContext(AuthContext);
   const { wishlistCount } = useContext(WishlistContext);
@@ -30,7 +31,7 @@ export default function Profile() {
       cardLast4: user.cardLast4 || ""
     });
 
-    fetch("http://localhost:5001/api/orders")
+    fetch(apiUrl("/api/orders"))
       .then((res) => res.json())
       .then((data) => {
         const myOrders = data.filter((o) => o.customer.email === user.email);
@@ -47,7 +48,7 @@ export default function Profile() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const res = await fetch(`http://localhost:5001/api/users/${user.id}`, {
+      const res = await fetch(apiUrl(`/api/users/${user.id}`), {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)

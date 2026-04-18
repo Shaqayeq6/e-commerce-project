@@ -2,13 +2,14 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
+import { apiUrl } from "../lib/api";
 export default function AdminOrders() {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     if (user?.role === "admin") {
-      fetch("http://localhost:5001/api/orders")
+      fetch(apiUrl("/api/orders"))
         .then(res => res.json())
         .then(data => setOrders(data))
         .catch(err => console.error(err));
