@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: stepstyle-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: stepstyle
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - stepstyle_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  stepstyle_postgres_data:

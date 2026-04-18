@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
+import { apiUrl } from "../lib/api";
 export default function Customers() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function Customers() {
   });
 
   const loadCustomers = () => {
-    fetch("http://localhost:5001/api/users")
+    fetch(apiUrl("/api/users"))
       .then((res) => res.json())
       .then((data) => {
         setCustomers(data);
@@ -70,7 +71,7 @@ export default function Customers() {
 
   const saveEdit = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5001/api/users/${id}`, {
+      const res = await fetch(apiUrl(`/api/users/${id}`), {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

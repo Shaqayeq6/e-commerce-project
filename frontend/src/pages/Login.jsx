@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
+import { apiUrl } from "../lib/api";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +15,7 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5001/api/auth/login", {
+      const res = await fetch(apiUrl("/api/auth/login"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -79,8 +80,9 @@ export default function Login() {
         </button>
       </form>
 
-      <div style={{ marginTop: 24 }}>
-        Don't have an account? <Link to="/register" style={{ color: "#111", fontWeight: "bold" }}>Sign Up</Link>
+      <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 8 }}>
+        <div><Link to="/forgot-password" style={{ color: "#111", fontSize: "0.9rem" }}>Forgot your password?</Link></div>
+        <div>Don't have an account? <Link to="/register" style={{ color: "#111", fontWeight: "bold" }}>Sign Up</Link></div>
       </div>
     </div>
   );

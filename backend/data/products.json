@@ -6,7 +6,7 @@
     "category": "Men",
     "type": "Running",
     "price": 129.99,
-    "quantity": 9,
+    "quantity": 8,
     "sizes": [
       7,
       8,
@@ -25,7 +25,7 @@
     "category": "Women",
     "type": "Sneaker",
     "price": 109.99,
-    "quantity": 5,
+    "quantity": 3,
     "sizes": [
       6,
       7,
@@ -44,7 +44,7 @@
     "category": "Men",
     "type": "Running",
     "price": 149.99,
-    "quantity": 5,
+    "quantity": 3,
     "sizes": [
       8,
       9,
@@ -62,7 +62,7 @@
     "category": "Women",
     "type": "Sneaker",
     "price": 99.99,
-    "quantity": 12,
+    "quantity": 4,
     "sizes": [
       6,
       7,
@@ -81,7 +81,7 @@
     "category": "Kids",
     "type": "Sport",
     "price": 49.99,
-    "quantity": 15,
+    "quantity": 14,
     "sizes": [
       1,
       2,
@@ -98,7 +98,7 @@
     "category": "Women",
     "type": "Sneaker",
     "price": 79.99,
-    "quantity": 6,
+    "quantity": 5,
     "sizes": [
       6,
       7,
@@ -161,5 +161,195 @@
     ],
     "image": "https://images.unsplash.com/photo-1667397310866-dd13e0ccb5eb?w=600&q=80&auto=format",
     "description": "High-top Vans sneakers designed for comfort and durability."
+  },
+  {
+    "id": 10,
+    "name": "Court Vision Low Premium",
+    "brand": "Nike",
+    "category": "Men",
+    "type": "Sneaker",
+    "price": 99.99,
+    "quantity": 8,
+    "sizes": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "image": "https://images.pexels.com/photos/13236691/pexels-photo-13236691.jpeg?w=800&q=80&auto=format",
+    "description": "Vintage Nike sneakers in a bold Royal Blue."
+  },
+  {
+    "id": 11,
+    "name": "Air Max 90",
+    "brand": "Nike",
+    "category": "Men",
+    "type": "Running",
+    "price": 170,
+    "quantity": 6,
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "image": "https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/685d83e2-c137-4f0e-ae1d-9dcdb7c4c790/AIR+MAX+90.png?w=600&q=80&auto=format",
+    "description": "A modern take on a 90s Nike running shoe."
+  },
+  {
+    "id": 12,
+    "name": "Noemia",
+    "brand": "Mango",
+    "category": "Women",
+    "type": "Boots",
+    "price": 89.99,
+    "quantity": 7,
+    "sizes": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "image": "https://images.pexels.com/photos/26851201/pexels-photo-26851201.jpeg?w=600&q=80&auto=format",
+    "description": "Modern chunky block heels, perfect for a night out."
+  },
+  {
+    "id": 13,
+    "name": "Juliette",
+    "brand": "Mango",
+    "category": "Women",
+    "type": "Boots",
+    "price": 110.99,
+    "quantity": 10,
+    "sizes": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "image": "https://images.pexels.com/photos/27256459/pexels-photo-27256459.jpeg?w=600&q=80&auto=format",
+    "description": "Stylish brown leather boots with a unique wooden heel."
+  },
+  {
+    "id": 14,
+    "name": "2976 Chelsea Boots",
+    "brand": "Doc Martens",
+    "category": "Men",
+    "type": "Boots",
+    "price": 224.99,
+    "quantity": 9,
+    "sizes": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "image": "https://cdn.media.amplience.net/i/drmartens/22227001.80?$smart576$&fmt=auto?w=600&q=80&auto=format",
+    "description": "The 2976 boot is the Dr. Martens spin on the traditional Chelsea boot silhouette."
+  },
+  {
+    "id": 15,
+    "name": "Anistone Hi Leather Biker Boots",
+    "brand": "Doc Martens",
+    "category": "Men",
+    "type": "Boots",
+    "price": 259.99,
+    "quantity": 8,
+    "sizes": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "image": "https://cdn.media.amplience.net/i/drmartens/31901201.80?$smart576$&fmt=auto?w=600&q=80&auto=format",
+    "description": "A tough burnished leather boot with industrial hardware, featuring branded metal plates and an adjustable buckle."
+  },
+  {
+    "id": 16,
+    "name": "Pink Classic Clog",
+    "brand": "Crocs",
+    "category": "Kids",
+    "type": "Sport",
+    "price": 49.99,
+    "quantity": 7,
+    "sizes": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "image": "https://images.pexels.com/photos/8801123/pexels-photo-8801123.jpeg?w=600&q=80&auto=format",
+    "description": "Bring pink Crocs with an extra starry cute touch."
+  },
+  {
+    "id": 17,
+    "name": "Grand Court 2.0",
+    "brand": "Adidas",
+    "category": "Kids",
+    "type": "Running",
+    "price": 59.99,
+    "quantity": 8,
+    "sizes": [
+      5,
+      6,
+      7
+    ],
+    "image": "https://d16aymak0y9zsb.cloudfront.net/Sportsplus/product/1080x1080/21022024/FZ6161_1_1703770932-1536744767410.jpg?w=600&q=80&auto=format",
+    "description": "A fresh take on tennis-inspired design with a durable rubber cupsole, these shoes provide all-day comfort and support."
+  },
+  {
+    "id": 18,
+    "name": "Zoom Pegasus 34",
+    "brand": "Nike",
+    "category": "Men",
+    "type": "Running",
+    "price": 120,
+    "quantity": 8,
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "image": "https://images.pexels.com/photos/1456706/pexels-photo-1456706.jpeg?w=600&q=80&auto=format",
+    "description": "An electric colourway on a classic Nike runner."
+  },
+  {
+    "id": 19,
+    "name": "1410 Mono Patent Leather",
+    "brand": "Doc Martens",
+    "category": "Women",
+    "type": "Boots",
+    "price": 240.99,
+    "quantity": 8,
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "image": "https://images.pexels.com/photos/27298361/pexels-photo-27298361.jpeg?w=600&q=80&auto=format",
+    "description": "A white classic boot with a chunky sole."
+  },
+  {
+    "id": 20,
+    "name": "Premium Authentic 44 'Dress Blues ",
+    "brand": "Vans",
+    "category": "Women",
+    "type": "Sneaker",
+    "price": 80.99,
+    "quantity": 8,
+    "sizes": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "image": "https://images.pexels.com/photos/14525667/pexels-photo-14525667.jpeg?w=600&q=80&auto=format",
+    "description": "Uniquely pre-distressed classic canvas shoes."
   }
 ]

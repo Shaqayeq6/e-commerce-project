@@ -5,6 +5,7 @@ import { WishlistContext } from "../context/WishlistContext";
 
 const inputStyle = { width: "100%", padding: 8, margin: "4px 0 12px", borderRadius: 6, border: "1px solid #ccc", boxSizing: "border-box" };
 
+import { apiUrl } from "../lib/api";
 export default function Profile() {
   const { user, logout, updateUser } = useContext(AuthContext);
   const { wishlistCount } = useContext(WishlistContext);
@@ -21,6 +22,7 @@ export default function Profile() {
 
     setForm({
       fullName: user.fullName || "",
+      username: user.username || "",
       email: user.email || "",
       phone: user.phone || "",
       address: user.address || "",
@@ -30,7 +32,7 @@ export default function Profile() {
       cardLast4: user.cardLast4 || ""
     });
 
-    fetch("http://localhost:5001/api/orders")
+    fetch(apiUrl("/api/orders"))
       .then((res) => res.json())
       .then((data) => {
         const myOrders = data.filter((o) => o.customer.email === user.email);
@@ -47,7 +49,7 @@ export default function Profile() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const res = await fetch(`http://localhost:5001/api/users/${user.id}`, {
+      const res = await fetch(apiUrl(`/api/users/${user.id}`), {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
@@ -82,6 +84,8 @@ export default function Profile() {
               <div>
                 <label>Full Name</label>
                 <input value={form.fullName} onChange={(e) => setForm({ ...form, fullName: e.target.value })} style={inputStyle} />
+                <label>Username</label>
+                <input value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} style={inputStyle} />
                 <label>Email</label>
                 <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} style={inputStyle} />
                 <label>Phone Number</label>
@@ -111,6 +115,7 @@ export default function Profile() {
               Edit Profile
             </button>
             <p><strong>Name:</strong> {user.fullName}</p>
+            <p><strong>Username:</strong> {user.username || "Not provided"}</p>
             <p><strong>Email:</strong> {user.email}</p>
             <p><strong>Phone:</strong> {user.phone || "Not provided"}</p>
             <p><strong>Role:</strong> {user.role === "admin" ? "Admin" : "Customer"}</p>

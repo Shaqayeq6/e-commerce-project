@@ -12,7 +12,9 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Customers from "./pages/Customers";
 import Admin from "./pages/Admin";
+import AdminOrders from "./pages/AdminOrders";
 import Wishlist from "./pages/Wishlist";
+import ForgotPassword from "./pages/ForgotPassword";
 import Chatbot from "./components/Chatbot";
 
 export default function App() {
@@ -28,11 +30,13 @@ export default function App() {
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/customers" element={<Customers />} />
+        <Route path="/admin/orders" element={<AdminOrders />} />
       </Routes>
       <Chatbot />
     </BrowserRouter>

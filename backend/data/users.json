@@ -37,6 +37,18 @@
   },
   {
     "id": 4,
+    "fullName": "Arash",
+    "email": "Arash@gmail.com",
+    "password": "123456",
+    "role": "customer",
+    "address": "5 lenvalley st",
+    "city": "Toronto",
+    "postalCode": "M1C 4GV",
+    "cardLast4": "0987",
+    "createdAt": "2026-04-07T19:07:00.838Z"
+  },
+  {
+    "id": 5,
     "fullName": "Maya Bennett",
     "email": "maya.bennett@icloud.com",
     "password": "york123",
@@ -48,15 +60,20 @@
     "createdAt": "2026-04-07T02:39:31.491Z"
   },
   {
-    "id": 5,
-    "fullName": "testuser 1",
-    "email": "testuser1@gmail.com",
+    "id": 6,
+    "fullName": "alexa l",
+    "email": "alexa.lupo5@gmail.com",
     "password": "testuser",
     "role": "customer",
-    "address": "jhsduasi",
-    "city": "slakhli",
-    "postalCode": "668958",
-    "cardLast4": "2233",
-    "createdAt": "2026-04-12T01:28:47.899Z"
+    "address": "123 mystreet ",
+    "city": "vaughan",
+    "postalCode": "AHA J3J",
+    "cardLast4": "3333",
+    "createdAt": "2026-04-12T01:28:47.899Z",
+    "phone": "1234567890",
+    "cardNumber": "",
+    "nameOnCard": "",
+    "expiry": "",
+    "cvv": ""
   }
 ]

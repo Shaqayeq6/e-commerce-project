@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
+import { apiUrl } from "../lib/api";
 export default function Admin() {
   const { user } = useContext(AuthContext);
 
@@ -23,7 +24,7 @@ export default function Admin() {
 
   const saveEdit = async () => {
     try {
-      const res = await fetch(`http://localhost:5001/api/products/${editingProduct.id}`, {
+      const res = await fetch(apiUrl(`/api/products/${editingProduct.id}`), {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,7 +47,7 @@ export default function Admin() {
 
   const loadProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5001/api/products");
+      const res = await fetch(apiUrl("/api/products"));
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -83,7 +84,7 @@ export default function Admin() {
           .filter((n) => !Number.isNaN(n))
       };
 
-      const res = await fetch("http://localhost:5001/api/products", {
+      const res = await fetch(apiUrl("/api/products"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -121,7 +122,7 @@ export default function Admin() {
     if (!confirmed) return;
 
     try {
-      const res = await fetch(`http://localhost:5001/api/products/${id}`, {
+      const res = await fetch(apiUrl(`/api/products/${id}`), {
         method: "DELETE"
       });
 
