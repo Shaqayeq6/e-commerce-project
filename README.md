@@ -76,6 +76,7 @@ npm run seed:postgres
 This will create the tables and populate the local PostgreSQL database using the project seed data.
 
 **Start backend normally:**
+```
 npx nodemon server.js
 ```
 ---
