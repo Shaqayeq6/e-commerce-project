@@ -66,6 +66,7 @@ Example local connection string for the `backend/.env` file:
 ```env
 DB_MODE=postgres
 DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/shaqawear
+```
 
 **Run the seed script:**
 npm run seed:postgres
