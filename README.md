@@ -69,6 +69,7 @@ DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/shaqawear
 ```
 
 **Run the seed script:**
+```
 npm run seed:postgres
 ```
 
